@@ -1,0 +1,13 @@
+#!/usr/bin/ruby
+
+if RUBY_PLATFORM =~ /linux/
+  executable = 'wkhtmltopdf_linux_386'
+elsif RUBY_PLATFORM =~ /darwin/
+  executable = 'wkhtmltopdf_darwin_386'
+else
+  raise "Invalid platform. Must be running linux or intel-based Mac OS."
+end
+
+executable = File.join(File.dirname(__FILE__), executable)
+system(executable + " " + $*.join(" "))
+
