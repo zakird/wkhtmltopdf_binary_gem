@@ -5,8 +5,8 @@ require 'rake/gempackagetask'
 spec = Gem::Specification.new do |s| 
   s.name = "wkhtmltopdf-binary"
   s.version = "0.1.9"
-  s.author = "Research Information Systems, The University of Iowa"
-  s.email = "vpr-ris-developers@iowa.uiowa.edu"
+  s.author = "Zakir Durumeric"
+  s.email = "zakird@gmail.com"
   s.platform = Gem::Platform::RUBY
   s.summary = "Provides binaries for WKHTMLTOPDF project in an easily accessible package."
   s.files = FileList["{bin}/**/*"].to_a
