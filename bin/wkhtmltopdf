@@ -11,5 +11,4 @@ else
 end
 
 executable = File.join(File.dirname(__FILE__), executable)
-system(executable + " " + $*.join(" "))
-
+system *$*.unshift(executable)
