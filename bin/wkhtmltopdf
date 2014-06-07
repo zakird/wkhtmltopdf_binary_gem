@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 /*
  * wkhtmltopdf_binary_gem Copyright 2013 The University of Iowa 
