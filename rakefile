@@ -1,20 +1,7 @@
 require 'rubygems'
-require 'rake/packagetask'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 
-spec = Gem::Specification.new do |s| 
-  s.name = "wkhtmltopdf-binary"
-  s.version = "0.9.9.3"
-  s.author = "Zakir Durumeric"
-  s.email = "zakird@gmail.com"
-  s.platform = Gem::Platform::RUBY
-  s.summary = "Provides binaries for WKHTMLTOPDF project in an easily accessible package."
-  s.files = FileList["{bin}/**/*"].to_a
-  s.has_rdoc = false
-  s.executables << "wkhtmltopdf"
-  s.require_path = '.'
-end
-
-Rake::GemPackageTask.new(spec) do |pkg|
+spec = eval(File.new("wkhtmltopdf-binary.gemspec").readlines.join("\n"))
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_tar = true
 end
