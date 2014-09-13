@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 ###
-# wkhtmltopdf_binary_gem Copyright 2013 The University of Iowa 
+# wkhtmltopdf_binary_gem Copyright 2013 The University of Iowa
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy
@@ -10,9 +10,9 @@
 require 'rbconfig'
 
 if RbConfig::CONFIG['host_os'] =~ /linux/
-  executable = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'wkhtmltopdf_linux_x64' : 'wkhtmltopdf_linux_386'
+  executable = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'wkhtmltopdf_linux_amd64' : 'wkhtmltopdf_linux_x86'
 elsif RbConfig::CONFIG['host_os'] =~ /darwin/
-  executable = 'wkhtmltopdf_darwin_386'
+  executable = 'wkhtmltopdf_darwin_x86'
 else
   raise "Invalid platform. Must be running linux or intel-based Mac OS."
 end
