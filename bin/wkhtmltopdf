@@ -20,4 +20,4 @@ else
   raise "Invalid platform. Must be running on linux or intel-based Mac OS."
 end
 
-system *$*.unshift("#{__FILE__}_#{suffix}")
+exec *$*.unshift("#{__FILE__}_#{suffix}")
