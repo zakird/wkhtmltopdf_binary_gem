@@ -9,11 +9,9 @@
 
 require 'rbconfig'
 
-suffix = case RbConfig::CONFIG['host']
-when /x86_64.*linux/
-  'linux_amd64'
+suffix = case RbConfig::CONFIG['host_os']
 when /linux/
-  'linux_x86'
+  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'linux_amd64' : 'linux_x86'
 when /darwin/
   'darwin_x86'
 else
