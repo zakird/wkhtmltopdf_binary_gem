@@ -1,0 +1,19 @@
+# 0.12.3.1
+Fix JRuby compatibility
+
+# 0.12.3
+Update `wkhtmltopdf` binaries with version 0.12.3
+
+# 0.12.1
+Update `wkhtmltopdf` binaries with version 0.12.1
+
+# 0.9.9.2
+Add Apache License
+Use `/usr/bin/env` to find Ruby binary
+
+# 0.9.9.1
+Update MacOS `wkhtmltopdf` binary to 0.9.9
+
+# 0.9.9
+Update `wkhtmltopdf` binaries with version 0.9.9
+
