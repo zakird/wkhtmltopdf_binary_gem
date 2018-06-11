@@ -1,3 +1,6 @@
+# 0.12.4
+Update `wkhtmltopdf` binaries with version 0.12.4
+
 # 0.12.3.1
 Fix JRuby compatibility
 
