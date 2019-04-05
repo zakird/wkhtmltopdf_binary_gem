@@ -10,10 +10,10 @@
 require 'rbconfig'
 
 suffix = case RbConfig::CONFIG['host_os']
-when /linux/
-  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'linux_amd64' : 'linux_x86'
+when /linux/ # using binaries for Ubuntu 18.04 (bionic)
+  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'bionic_amd64' : 'bionic_i386'
 when /darwin/
-  'darwin_x86'
+  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'macos_cocoa' : 'macos_carbon'
 else
   raise "Invalid platform. Must be running on linux or intel-based Mac OS."
 end
