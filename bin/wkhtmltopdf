@@ -10,12 +10,22 @@
 require 'rbconfig'
 
 suffix = case RbConfig::CONFIG['host_os']
-when /linux/ # using binaries for Ubuntu 18.04 (bionic)
-  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'bionic_amd64' : 'bionic_i386'
-when /darwin/
-  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'macos_cocoa' : 'macos_carbon'
-else
-  raise "Invalid platform. Must be running on linux or intel-based Mac OS."
+         when /linux/ # using binaries for Ubuntu
+           codename = `lsb_release --codename --short`.strip
+           architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
+
+           "#{codename}_#{architecture}"
+         when /darwin/
+           RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'macos_cocoa' : 'macos_carbon'
+         else
+           'unknown'
+         end
+
+binary = "#{__FILE__}_#{suffix}"
+
+unless File.exist? binary
+  raise 'Invalid platform. Must be running on Ubuntu (Xenial or Bionic) or ' \
+        "intel-based Mac OS (missing binary: #{binary})."
 end
 
-system *$*.unshift("#{__FILE__}_#{suffix}")
+system *$*.unshift(binary)
