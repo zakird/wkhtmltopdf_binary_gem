@@ -24,7 +24,7 @@ suffix = case RbConfig::CONFIG['host_os']
 binary = "#{__FILE__}_#{suffix}"
 
 unless File.exist? binary
-  raise 'Invalid platform. Must be running on Ubuntu (Xenial or Bionic) or ' \
+  raise 'Invalid platform. Must be running on Ubuntu (Trusty, Xenial or Bionic) or ' \
         "intel-based Mac OS (missing binary: #{binary})."
 end
 
