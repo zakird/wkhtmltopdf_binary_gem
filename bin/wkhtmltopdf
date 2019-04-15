@@ -10,11 +10,11 @@
 require 'rbconfig'
 
 suffix = case RbConfig::CONFIG['host_os']
-         when /linux/ # using binaries for Ubuntu
-           codename = `lsb_release --codename --short`.strip
+         when /linux/
+           os = `. /etc/os-release && echo ${ID}_${VERSION_ID}`.strip
            architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
 
-           "#{codename}_#{architecture}"
+           "#{os}_#{architecture}"
          when /darwin/
            RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'macos_cocoa' : 'macos_carbon'
          else
