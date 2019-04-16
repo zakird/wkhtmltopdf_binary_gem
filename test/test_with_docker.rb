@@ -1,11 +1,6 @@
 require 'minitest/autorun'
 
 class WithDockerTest < Minitest::Test
-  # # Run code before a group of test (see: https://github.com/seattlerb/minitest#how-to-run-code-before-a-group-of-tests)
-  # SETUP = begin
-  #   `docker-compose build`
-  # end
-
   def test_centos_6
     test with: 'centos_6'
   end
