@@ -1,0 +1,5 @@
+FROM centos:7
+
+RUN yum install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext
+
+CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version
