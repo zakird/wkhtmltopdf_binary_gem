@@ -12,4 +12,6 @@ Gem::Specification.new do |s|
   s.has_rdoc = false
   s.executables << "wkhtmltopdf"
   s.require_path = '.'
+
+  s.add_development_dependency "minitest"
 end
