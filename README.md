@@ -17,6 +17,11 @@ macOS
     xar -xf wkhtmltox-0.12.5-1.macos-cocoa.pkg
     cat Payload | gunzip -dc | cpio -i
 
+## Compression
+
+Binaries should be compressed with `bzip2 -9` after extracting. The matching binary will be extracted on first
+execution of `bin/wkhtmltopdf`.
+
 ## Testing with Docker
 
 Make sure you have Docker and Docker Compose installed (see https://docs.docker.com/compose/install/ for more
