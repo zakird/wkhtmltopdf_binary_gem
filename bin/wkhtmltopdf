@@ -30,7 +30,10 @@ suffix = case RbConfig::CONFIG['host_os']
 binary = "#{__FILE__}_#{suffix}"
 
 if File.exist?("#{binary}.bz2") && !File.exist?(binary)
-  system("bzip2 --decompress --keep #{binary}.bz2") ||
+  # There was an error on macOS when a hard link to the archive exists (could be
+  # Time Machine). Even with `--keep` it states: 'Input file has 1 other link'.
+  # Using `--force` fixes this.
+  system("bzip2 --decompress --keep --force #{binary}.bz2") ||
     raise("Decompression of #{binary}.bz2 failed. Do you have bzip2 installed?")
 end
 
