@@ -19,7 +19,7 @@ macOS
 
 ## Compression
 
-Binaries should be compressed with `bzip2 -9` after extracting. The matching binary will be extracted on first
+Binaries should be compressed with `gzip --best` after extracting. The matching binary will be extracted on first
 execution of `bin/wkhtmltopdf`.
 
 ## Testing with Docker

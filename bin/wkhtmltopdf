@@ -8,6 +8,7 @@
 # of the License at http://www.apache.org/licenses/LICENSE-2.0
 
 require 'rbconfig'
+require 'zlib'
 
 suffix = case RbConfig::CONFIG['host_os']
          when /linux/
@@ -29,12 +30,10 @@ suffix = case RbConfig::CONFIG['host_os']
 
 binary = "#{__FILE__}_#{suffix}"
 
-if File.exist?("#{binary}.bz2") && !File.exist?(binary)
-  # There was an error on macOS when a hard link to the archive exists (could be
-  # Time Machine). Even with `--keep` it states: 'Input file has 1 other link'.
-  # Using `--force` fixes this.
-  system("bzip2 --decompress --keep --force #{binary}.bz2") ||
-    raise("Decompression of #{binary}.bz2 failed. Do you have bzip2 installed?")
+if File.exist?("#{binary}.gz") && !File.exist?(binary)
+  File.open binary, 'wb', 0o755 do |file|
+    Zlib::GzipReader.open("#{binary}.gz") { |gzip| file << gzip.read }
+  end
 end
 
 unless File.exist? binary
