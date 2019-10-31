@@ -8,14 +8,38 @@
 # of the License at http://www.apache.org/licenses/LICENSE-2.0
 
 require 'rbconfig'
+require 'zlib'
 
 suffix = case RbConfig::CONFIG['host_os']
-when /linux/
-  (RbConfig::CONFIG['host_cpu'] == 'x86_64') ? 'linux_amd64' : 'linux_x86'
-when /darwin/
-  'darwin_x86'
-else
-  raise "Invalid platform. Must be running on linux or intel-based Mac OS."
+         when /linux/
+           os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
+
+           # CentOS 6 doesn't have `/etc/os-release`.
+           if os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')
+             os = 'centos_6'
+           end
+
+           architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
+
+           "#{os}_#{architecture}"
+         when /darwin/
+           RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'macos_cocoa' : 'macos_carbon'
+         else
+           'unknown'
+         end
+
+binary = "#{__FILE__}_#{suffix}"
+
+if File.exist?("#{binary}.gz") && !File.exist?(binary)
+  File.open binary, 'wb', 0o755 do |file|
+    Zlib::GzipReader.open("#{binary}.gz") { |gzip| file << gzip.read }
+  end
 end
 
-system *$*.unshift("#{__FILE__}_#{suffix}")
+unless File.exist? binary
+  raise 'Invalid platform, must be running on Ubuntu 14.04/16.04/18.04 ' \
+        'CentOS 6/7, Debian 8/9, or intel-based macOS ' \
+        "(missing binary: #{binary})."
+end
+
+system *$*.unshift(binary)
