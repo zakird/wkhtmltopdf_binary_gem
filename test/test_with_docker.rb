@@ -22,6 +22,10 @@ class WithDockerTest < Minitest::Test
     test with: 'debian_9'
   end
 
+  def test_debian_10
+    test with: 'debian_10'
+  end
+
   def test_with_ubuntu_14
     test with: 'ubuntu_14.04'
   end
