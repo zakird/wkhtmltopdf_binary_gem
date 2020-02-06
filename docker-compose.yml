@@ -56,3 +56,10 @@ services:
       dockerfile: .docker/Dockerfile-centos_7
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
+
+  centos_8:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-centos_8
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
