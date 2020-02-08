@@ -15,7 +15,8 @@ suffix = case RbConfig::CONFIG['host_os']
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
            # CentOS 6 doesn't have `/etc/os-release`.
-           if os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')
+           if (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')) ||
+               os.start_with?('amzn_')
              os = 'centos_6'
            end
 
