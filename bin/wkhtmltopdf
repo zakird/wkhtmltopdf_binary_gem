@@ -43,4 +43,4 @@ unless File.exist? binary
         "(missing binary: #{binary})."
 end
 
-system *$*.unshift(binary)
+exec *$*.unshift(binary)
