@@ -44,7 +44,7 @@ end
 
 unless File.exist? binary
   raise 'Invalid platform, must be running on Ubuntu 14.04/16.04/18.04 ' \
-        'CentOS 6/7, Debian 8/9/10, or intel-based macOS ' \
+        'CentOS 6/7/8, Debian 8/9/10, or intel-based macOS ' \
         "(missing binary: #{binary})."
 end
 

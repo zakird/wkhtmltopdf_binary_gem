@@ -2,6 +2,7 @@
 pkg/*
 bin/wkhtmltopdf_centos_6_amd64
 bin/wkhtmltopdf_centos_7_amd64
+bin/wkhtmltopdf_centos_8_amd64
 bin/wkhtmltopdf_debian_8_amd64
 bin/wkhtmltopdf_debian_9_amd64
 bin/wkhtmltopdf_debian_10_amd64
