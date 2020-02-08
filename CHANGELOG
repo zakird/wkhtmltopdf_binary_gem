@@ -1,8 +1,11 @@
 # 0.12.5.2
-Added support for CentOS 8
+Add support for CentOS 8
+Add support for Amazon Linux using the CentOS 6 binary
+Add support for Linux Mint 19 and Elementary OS using the Ubuntu 18 binary
+Use `exec` instead of `system` in binstub
 
 # 0.12.5.1
-Added support for Debian Buster (10)
+Add support for Debian Buster (10)
 
 # 0.12.5
 Update `wkhtmltopdf` binaries with version 0.12.5

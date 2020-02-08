@@ -6,11 +6,10 @@ Install in your Gemfile as usual
 gem 'wkhtmltopdf-binary'
 ```
 
-In many environments, this is all you need to do. Whatever is depending on the wkhtmltopdf binary
-will find it in your bin path (along with other binaries installed by gems).
+In many environments, this is all you need to do. This gem installs a binary stub that tries to determine which wkhtmltopdf binary will work on your system, and point to the packaged binary that most closely matches.
 
 In some environments, invoking this binary will result in an error, saying the needed permissions are not available.
-This is because wkhtmltopdf-binary ships with gziped binaries for many platforms, and then picks the appropriate one
+This is because `wkhtmltopdf-binary` ships with gzipped binaries for many platforms, and then picks the appropriate one
 upon first use and unzips it into the same directory. So if your ruby gem binaries are installed here:
 
     /usr/lib/ruby/versions/2.6/bin/
@@ -20,7 +19,7 @@ The various wkhtmltopdf-binaries will be installed here:
     /usr/lib/ruby/versions/2.6/lib/ruby/gems/2.6.0/gems/wkhtmltopdf-binary-0.12.5.1/bin/
 
 Giving write access whatever user is running your program (e.g. web server, background job processor),
-e.g. your own personal user in a dev environment, will fix the problem.
+e.g. your own personal user in a dev environment, will fix the problem. After the binary is uncompressed, write access can be revoked again if desired.
 
     chmod -R 777 /usr/lib/ruby/versions/2.6/lib/ruby/gems/2.6.0/gems/wkhtmltopdf-binary-0.12.5.1/bin/
 
