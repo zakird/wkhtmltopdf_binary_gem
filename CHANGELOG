@@ -1,3 +1,6 @@
+# 0.12.5.3
+Fix typo (missing question mark in `start_with`)
+
 # 0.12.5.2
 Add support for CentOS 8
 Add support for Amazon Linux using the CentOS 6 binary
