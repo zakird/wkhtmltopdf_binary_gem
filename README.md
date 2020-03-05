@@ -1,4 +1,4 @@
-# Instalation and usage
+# Installation and usage
 
 Install in your Gemfile as usual
 
