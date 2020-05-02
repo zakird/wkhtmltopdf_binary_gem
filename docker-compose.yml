@@ -63,3 +63,10 @@ services:
       dockerfile: .docker/Dockerfile-centos_8
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
+
+  deepin:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-deepin
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
