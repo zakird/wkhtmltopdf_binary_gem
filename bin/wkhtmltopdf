@@ -14,7 +14,7 @@ suffix = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
-           if os.start_with?('elementary') || os.start_with?('linuxmint')
+           if os.start_with?('elementary') || os.start_with?('linuxmint') || os.start_with?('pop')
              os = 'ubuntu_18.04'
            end
 
