@@ -24,6 +24,9 @@ suffix = case RbConfig::CONFIG['host_os']
              os = 'centos_6'
            end
 
+           # Deepin fallback
+           os = 'debian_9' if /deepin/.match?(os)
+
            architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
 
            "#{os}_#{architecture}"
