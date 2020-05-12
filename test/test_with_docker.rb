@@ -42,6 +42,10 @@ class WithDockerTest < Minitest::Test
     test with: 'ubuntu_18.04'
   end
 
+  def test_with_ubuntu_20
+    test with: 'ubuntu_20.04'
+  end
+
   def test_with_macos
     assert_equal `bin/wkhtmltopdf --version`.strip, 'wkhtmltopdf 0.12.5 (with patched qt)'
   end
