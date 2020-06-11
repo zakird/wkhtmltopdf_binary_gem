@@ -1,3 +1,9 @@
+# 0.12.6
+
+Update `wkhtmltopdf` binaries with version 0.12.6
+Remove binary for Debian 8, that is not supported anymore
+Add binary for Ubuntu 20.04
+
 # 0.12.5.4
 Remove accidental unpacked binary
 
