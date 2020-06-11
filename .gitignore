@@ -11,6 +11,7 @@ bin/wkhtmltopdf_macos_carbon
 bin/wkhtmltopdf_ubuntu_14.04_amd64
 bin/wkhtmltopdf_ubuntu_16.04_amd64
 bin/wkhtmltopdf_ubuntu_18.04_amd64
+bin/wkhtmltopdf_ubuntu_20.04_amd64
 bin/wkhtmltopdf_centos_6_i386
 bin/wkhtmltopdf_centos_7_i386
 bin/wkhtmltopdf_debian_8_i386
