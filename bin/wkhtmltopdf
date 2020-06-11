@@ -31,7 +31,7 @@ suffix = case RbConfig::CONFIG['host_os']
 
            "#{os}_#{architecture}"
          when /darwin/
-           RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'macos_cocoa' : 'macos_carbon'
+           'macos_cocoa'
          else
            'unknown'
          end
