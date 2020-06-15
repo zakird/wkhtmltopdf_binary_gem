@@ -1,3 +1,8 @@
+# 0.12.6
+Update `wkhtmltopdf` binaries with version 0.12.6
+Remove binary for Debian 8/Ubuntu 14.04/MacOS Carbon, that is not supported anymore by `wkhtmltopdf`
+Add binary for Ubuntu 20.04
+
 # 0.12.5.4
 Remove accidental unpacked binary
 
