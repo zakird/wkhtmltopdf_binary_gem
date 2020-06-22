@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.files = Dir['bin/*']
   s.executables << "wkhtmltopdf"
   s.require_path = '.'
+  s.extensions = %w[ext/wkhtmltopdf/extconf.rb]
 
   s.add_development_dependency "minitest"
 end
