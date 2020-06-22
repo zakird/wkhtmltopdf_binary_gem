@@ -18,9 +18,13 @@ suffix = case RbConfig::CONFIG['host_os']
              os = 'ubuntu_18.04'
            end
 
+           if os.start_with?('amzn_2')
+             os = 'centos_7'
+           end
+
            # CentOS 6 doesn't have `/etc/os-release`.
            if (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')) ||
-               os.start_with?('amzn_')
+               (os.start_with?('amzn_') && !os.start_with?('amzn_2'))
              os = 'centos_6'
            end
 
