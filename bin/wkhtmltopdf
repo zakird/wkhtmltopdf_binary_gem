@@ -14,10 +14,10 @@ suffix = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
-           os_based_on_ubuntu_16_04 = os.start_with?('ubuntu_16.')
+           os_based_on_ubuntu_16_04 = os.start_with?('ubuntu_16.') || os.start_with?('ubuntu_17.')
            os = 'ubuntu_16.04' if os_based_on_ubuntu_16_04
 
-           os_based_on_ubuntu_18_04 = os.start_with?('ubuntu_18.') || os.start_with?('elementary') || os.start_with?('linuxmint') || os.start_with?('pop')
+           os_based_on_ubuntu_18_04 = os.start_with?('ubuntu_18.') || os.start_with?('ubuntu_19.') || os.start_with?('elementary') || os.start_with?('linuxmint') || os.start_with?('pop')
            os = 'ubuntu_18.04' if os_based_on_ubuntu_18_04
 
            os_based_on_ubuntu_20_04 = os.start_with?('ubuntu_20.')
