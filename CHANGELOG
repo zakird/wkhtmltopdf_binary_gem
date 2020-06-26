@@ -1,3 +1,7 @@
+# 0.12.6.2
+
+OS mapping for more distros, based in official support OS for wkhtmltopdf
+
 # 0.12.6.1
 
 Add missing binary for Ubuntu 20.04
