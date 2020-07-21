@@ -37,6 +37,10 @@ CentOS
 
     rpm2cpio wkhtmltox-0.12.5-1.centos7.x86_64.rpm | cpio -idmv
 
+Archlinux/manjaro
+
+    tar -xf wkhtmltox-0.12.6-1.archlinux.x86_64.tar.xz
+
 macOS
 
     xar -xf wkhtmltox-0.12.5-1.macos-cocoa.pkg
@@ -56,6 +60,6 @@ There are Dockerfiles for the supported Linux based distributions under `.docker
 `docker-compose build` and run each individually with e.g. `docker-compose run ubuntu_18.04`.
 
 There also is a rudimentary minitest test that simply invokes `docker-compose run` for each distribution and
-expects to see the output of `wkhtmltopdf --version`. Just run `rake` to run it. 
+expects to see the output of `wkhtmltopdf --version`. Just run `rake` to run it.
 
 You can clean up after testing with `docker-compose down --rmi all`.

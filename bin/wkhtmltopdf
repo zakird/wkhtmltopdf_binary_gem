@@ -32,6 +32,9 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_debian_9 = /deepin/.match?(os)
            os = 'debian_9' if os_based_on_debian_9
 
+           os_based_on_archlinux = os.start_with?('arch_') || os.start_with?('manjaro_')
+           os = 'archlinux' if os_based_on_archlinux
+
            architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
 
            "#{os}_#{architecture}"
@@ -51,7 +54,7 @@ end
 
 unless File.exist? binary
   raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04 ' \
-        'CentOS 6/7/8, Debian 9/10, or intel-based Cocoa macOS ' \
+        'CentOS 6/7/8, Debian 9/10, archlinux amd64, or intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 
