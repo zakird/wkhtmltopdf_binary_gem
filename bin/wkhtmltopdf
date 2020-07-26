@@ -63,4 +63,9 @@ unless File.exist? binary
         "(missing binary: #{binary})."
 end
 
-exec *$*.unshift(binary)
+if $PROGRAM_NAME.eql? 'extconf.rb'
+  define_method(:suffix) { suffix }
+  define_method(:binary) { binary }
+else
+  exec *$*.unshift(binary)
+end
