@@ -43,6 +43,8 @@ suffix = case RbConfig::CONFIG['host_os']
          else
            'unknown'
          end
+         
+suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
 binary = "#{__FILE__}_#{suffix}"
 
