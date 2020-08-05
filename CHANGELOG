@@ -1,3 +1,8 @@
+# 0.12.6.3
+
+Add support for Archlinux and Manjaro
+Add ability to override which binary is detected for you based on `ENV['WKHTMLTOPDF_HOST_SUFFIX']`
+
 # 0.12.6.2
 
 OS mapping for more distros, based in official support OS for wkhtmltopdf
