@@ -32,6 +32,9 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_debian_9 = (/deepin/ =~ os)
            os = 'debian_9' if os_based_on_debian_9
 
+           os_based_on_debian = os.start_with?('debian')
+           os = 'debian_10' if os_based_on_debian
+
            os_based_on_archlinux = os.start_with?('arch_') || os.start_with?('manjaro_')
            os = 'archlinux' if os_based_on_archlinux
 
@@ -43,7 +46,7 @@ suffix = case RbConfig::CONFIG['host_os']
          else
            'unknown'
          end
-         
+
 suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
 binary = "#{__FILE__}_#{suffix}"
