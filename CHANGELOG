@@ -1,3 +1,8 @@
+# 0.12.6.4
+
+Fix version detection for Debian
+Use version match check that works on older Ruby versions
+
 # 0.12.6.3
 
 Add support for Archlinux and Manjaro
