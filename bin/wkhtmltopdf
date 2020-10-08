@@ -29,10 +29,10 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_centos_7 = os.start_with?('amzn_2')
            os = 'centos_7' if os_based_on_centos_7
 
-           os_based_on_debian_9 = (/deepin/ =~ os)
+           os_based_on_debian_9 = (/(debian_9|deepin)/ =~ os)
            os = 'debian_9' if os_based_on_debian_9
 
-           os_based_on_debian = os.start_with?('debian')
+           os_based_on_debian = !os_based_on_debian_9 && os.start_with?('debian')
            os = 'debian_10' if os_based_on_debian
 
            os_based_on_archlinux = os.start_with?('arch_') || os.start_with?('manjaro_')
