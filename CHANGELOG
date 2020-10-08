@@ -1,3 +1,7 @@
+# 0.12.6.5
+
+Fix ability to use on Debian 9 systems
+
 # 0.12.6.4
 
 Fix version detection for Debian
