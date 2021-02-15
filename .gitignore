@@ -15,3 +15,4 @@ bin/wkhtmltopdf_debian_9_i386
 bin/wkhtmltopdf_debian_10_i386
 bin/wkhtmltopdf_ubuntu_16.04_i386
 bin/wkhtmltopdf_ubuntu_18.04_i386
+bin/wkhtmltopdf_archlinux_amd64

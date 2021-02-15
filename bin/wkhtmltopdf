@@ -17,7 +17,7 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_ubuntu_16_04 = os.start_with?('ubuntu_16.') || os.start_with?('ubuntu_17.')
            os = 'ubuntu_16.04' if os_based_on_ubuntu_16_04
 
-           os_based_on_ubuntu_18_04 = os.start_with?('ubuntu_18.') || os.start_with?('ubuntu_19.') || os.start_with?('elementary') || os.start_with?('linuxmint') || os.start_with?('pop')
+           os_based_on_ubuntu_18_04 = os.start_with?('ubuntu_18.') || os.start_with?('ubuntu_19.') || os.start_with?('elementary') || os.start_with?('linuxmint') || os.start_with?('pop') || os.start_with?('zorin')
            os = 'ubuntu_18.04' if os_based_on_ubuntu_18_04
 
            os_based_on_ubuntu_20_04 = os.start_with?('ubuntu_20.')
@@ -29,8 +29,14 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_centos_7 = os.start_with?('amzn_2')
            os = 'centos_7' if os_based_on_centos_7
 
-           os_based_on_debian_9 = /deepin/.match?(os)
+           os_based_on_debian_9 = (/(debian_9|deepin)/ =~ os)
            os = 'debian_9' if os_based_on_debian_9
+
+           os_based_on_debian = !os_based_on_debian_9 && os.start_with?('debian')
+           os = 'debian_10' if os_based_on_debian
+
+           os_based_on_archlinux = os.start_with?('arch_') || os.start_with?('manjaro_')
+           os = 'archlinux' if os_based_on_archlinux
 
            architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
 
@@ -40,6 +46,8 @@ suffix = case RbConfig::CONFIG['host_os']
          else
            'unknown'
          end
+
+suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
 binary = "#{__FILE__}_#{suffix}"
 
@@ -51,7 +59,7 @@ end
 
 unless File.exist? binary
   raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04 ' \
-        'CentOS 6/7/8, Debian 9/10, or intel-based Cocoa macOS ' \
+        'CentOS 6/7/8, Debian 9/10, archlinux amd64, or intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 

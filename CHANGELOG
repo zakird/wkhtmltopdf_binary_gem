@@ -1,3 +1,17 @@
+# 0.12.6.5
+
+Fix ability to use on Debian 9 systems
+
+# 0.12.6.4
+
+Fix version detection for Debian
+Use version match check that works on older Ruby versions
+
+# 0.12.6.3
+
+Add support for Archlinux and Manjaro
+Add ability to override which binary is detected for you based on `ENV['WKHTMLTOPDF_HOST_SUFFIX']`
+
 # 0.12.6.2
 
 OS mapping for more distros, based in official support OS for wkhtmltopdf
