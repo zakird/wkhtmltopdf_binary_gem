@@ -18,7 +18,7 @@ The various wkhtmltopdf-binaries will be installed here:
 
     /usr/lib/ruby/versions/2.6/lib/ruby/gems/2.6.0/gems/wkhtmltopdf-binary-0.12.5.1/bin/
 
-Set WKHTMLTOPDF_GEM_MINIMIZE to 'yes' to remove all binaries except for the current platform.
+Set `WKHTMLTOPDF_GEM_MINIMIZE` to 'yes' to remove all binaries except for the current platform.
 
 Giving write access whatever user is running your program (e.g. web server, background job processor),
 e.g. your own personal user in a dev environment, will fix the problem. After the binary is uncompressed, write access can be revoked again if desired.
