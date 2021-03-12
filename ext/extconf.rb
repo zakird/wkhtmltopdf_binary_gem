@@ -13,9 +13,8 @@ BUILD_PATH = File.dirname(File.expand_path(__FILE__))
 # Check platform and upack binary
 load "#{BUILD_PATH}/../bin/wkhtmltopdf"
 
-MINIMIZE = %w(1 yes y yep true).any? do |e|
-  ENV['WKHTMLTOPDF_GEM_MINIMIZE']&.downcase&.include? e
-end
+GEM_MINIMIZE=ENV['WKHTMLTOPDF_GEM_MINIMIZE'].to_s.downcase
+MINIMIZE = %w(0 no n nope false).any? { |e| !GEM_MINIMIZE.include? e }
 
 if MINIMIZE
   # Remove gziped binaries from the bin directory

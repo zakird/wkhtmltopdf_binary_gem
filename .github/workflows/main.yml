@@ -2,7 +2,7 @@ name: Build and Publish Ruby Gem on Tag Pushes
 on:
   push:
     tags:
-      - '*.*.*.*'
+      - 'v*.*.*.*'
 
 jobs:
   build:
