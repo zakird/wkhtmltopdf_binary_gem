@@ -18,6 +18,10 @@ The various wkhtmltopdf-binaries will be installed here:
 
     /usr/lib/ruby/versions/2.6/lib/ruby/gems/2.6.0/gems/wkhtmltopdf-binary-0.12.5.1/bin/
 
+
+
+
+
 Set `WKHTMLTOPDF_GEM_MINIMIZE` to 'yes' to remove all binaries except for the current platform.
 
 Giving write access whatever user is running your program (e.g. web server, background job processor),
@@ -65,3 +69,6 @@ There also is a rudimentary minitest test that simply invokes `docker-compose ru
 expects to see the output of `wkhtmltopdf --version`. Just run `rake` to run it.
 
 You can clean up after testing with `docker-compose down --rmi all`.
+
+
+
