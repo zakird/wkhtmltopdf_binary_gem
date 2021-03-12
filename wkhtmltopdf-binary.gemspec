@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   s.executables << "wkhtmltopdf"
   s.require_path = '.'
   s.extensions = ['ext/extconf.rb'.freeze]
-  s.add_development_dependency "minitest"
+#  s.add_development_dependency "minitest"
 end
