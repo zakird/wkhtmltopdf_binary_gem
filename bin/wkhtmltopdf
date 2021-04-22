@@ -20,7 +20,7 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_ubuntu_18_04 = os.start_with?('ubuntu_18.') || os.start_with?('ubuntu_19.') || os.start_with?('elementary') || os.start_with?('linuxmint') || os.start_with?('pop') || os.start_with?('zorin')
            os = 'ubuntu_18.04' if os_based_on_ubuntu_18_04
 
-           os_based_on_ubuntu_20_04 = os.start_with?('ubuntu_20.')
+           os_based_on_ubuntu_20_04 = os.start_with?('ubuntu_20.') || os.start_with?('ubuntu_21.')
            os = 'ubuntu_20.04' if os_based_on_ubuntu_20_04
 
            os_based_on_centos_6 = (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')) || (os.start_with?('amzn_') && !os.start_with?('amzn_2'))
