@@ -63,3 +63,6 @@ There also is a rudimentary minitest test that simply invokes `docker-compose ru
 expects to see the output of `wkhtmltopdf --version`. Just run `rake` to run it.
 
 You can clean up after testing with `docker-compose down --rmi all`.
+
+
+
