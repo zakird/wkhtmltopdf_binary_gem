@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/testtask'
+require "rake/extensiontask"
 
 spec = eval(File.new("wkhtmltopdf-binary.gemspec").readlines.join("\n"))
 
@@ -14,3 +15,6 @@ end
 
 desc 'Run tests'
 task default: :test
+
+Rake::ExtensionTask.new "wkhtmltopdf" do |ext|
+end
