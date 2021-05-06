@@ -23,10 +23,13 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_ubuntu_20_04 = os.start_with?('ubuntu_20.')
            os = 'ubuntu_20.04' if os_based_on_ubuntu_20_04
 
-           os_based_on_centos_6 = (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')) || (os.start_with?('amzn_') && os !~ /\Aamzn_2\b/)
+           amazon_2 = os =~ /\Aamzn_2\b/
+           amazon_1 = os.start_with?('amzn_') && !amazon_2
+
+           os_based_on_centos_6 = (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')) || amazon_1
            os = 'centos_6' if os_based_on_centos_6
 
-           os_based_on_centos_7 = os =~ /\Aamzn_2\b/
+           os_based_on_centos_7 = amazon_2
            os = 'centos_7' if os_based_on_centos_7
 
            os_based_on_debian_9 = (/(debian_9|deepin)/ =~ os)
