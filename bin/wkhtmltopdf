@@ -26,7 +26,7 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_centos_6 = (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6')) || (os.start_with?('amzn_') && os !~ /\Aamzn_2\b/)
            os = 'centos_6' if os_based_on_centos_6
 
-           os_based_on_centos_7 = os =~ /Aamzn_2\b/
+           os_based_on_centos_7 = os =~ /\Aamzn_2\b/
            os = 'centos_7' if os_based_on_centos_7
 
            os_based_on_debian_9 = (/(debian_9|deepin)/ =~ os)
