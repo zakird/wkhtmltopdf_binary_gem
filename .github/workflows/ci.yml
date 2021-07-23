@@ -4,9 +4,10 @@ on: [push, pull_request]
 
 jobs:
   tests:
-    runs-on: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         ruby-version: [3.0]
     steps:
       - uses: actions/checkout@v2
