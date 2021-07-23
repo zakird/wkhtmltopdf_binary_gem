@@ -6,9 +6,9 @@ class WithDockerTest < Minitest::Test
     `docker-compose build`
   end
 
-  def test_centos_6
-    test with: 'centos_6'
-  end
+  #def test_centos_6
+  #  test with: 'centos_6'
+  #end
 
   def test_centos_7
     test with: 'centos_7'
