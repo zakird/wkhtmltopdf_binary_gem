@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, macos-latest]
     strategy:
       matrix:
         ruby-version: [3.0]
