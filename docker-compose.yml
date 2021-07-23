@@ -44,12 +44,12 @@ services:
   #   volumes:
   #     - .:/root/wkhtmltopdf_binary_gem
 
-  # centos_7:
-  #   build:
-  #     context: .
-  #     dockerfile: .docker/Dockerfile-centos_7
-  #   volumes:
-  #     - .:/root/wkhtmltopdf_binary_gem
+  centos_7:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-centos_7
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
 
   centos_8:
     build:

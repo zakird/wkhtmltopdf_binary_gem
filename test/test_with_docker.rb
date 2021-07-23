@@ -14,9 +14,9 @@ class WithDockerTest < Minitest::Test
   #  test with: 'centos_6'
   #end
 
-  #def test_centos_7
-  #  test with: 'centos_7'
-  #end
+  def test_centos_7
+    test with: 'centos_7'
+  end
 
   def test_centos_8
    test with: 'centos_8'
