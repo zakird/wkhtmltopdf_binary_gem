@@ -5,14 +5,13 @@ def macos?
 end
 
 class WithDockerTest < Minitest::Test
-  # Run code before a group of test (see: https://github.com/seattlerb/minitest#how-to-run-code-before-a-group-of-tests)
   SETUP = begin
     `docker-compose build --no-cache` unless macos?
   end
 
-  #def test_centos_6
-  #  test with: 'centos_6'
-  #end
+  def test_centos_6
+   test with: 'centos_6'
+  end
 
   def test_centos_7
     test with: 'centos_7'
