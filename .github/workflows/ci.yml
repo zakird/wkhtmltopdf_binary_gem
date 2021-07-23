@@ -8,7 +8,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        ruby-version: [3.0]
+        ruby-version: [2.3, 2.4, 2.5, 2.6, 2.7, 3.0]
     steps:
       - uses: actions/checkout@v2
 
@@ -22,9 +22,3 @@ jobs:
 
       - name: Run tests with Ruby ${{ matrix.ruby-version }}
         run: bundle exec rake
-
-      #- name: Build Dockerfile
-      #  run: docker build -t sample .
-
-      #- name: Run tests inside Docker container
-      #  run: docker run -v $(pwd):/some-folder/ -i sample
