@@ -1,0 +1,29 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [3.0]
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+
+      - name: Install dependencies
+        run: bundle install
+
+      - name: Run tests with Ruby ${{ matrix.ruby-version }}
+        run: bundle exec rake
+
+      #- name: Build Dockerfile
+      #  run: docker build -t sample .
+
+      #- name: Run tests inside Docker container
+      #  run: docker run -v $(pwd):/some-folder/ -i sample
