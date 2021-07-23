@@ -42,6 +42,10 @@ class WithDockerTest < Minitest::Test
     test with: 'ubuntu_20.04'
   end
 
+  def test_with_deepin
+    test with: 'deepin'
+  end
+
   #def test_with_archlinux
   #  test with: 'archlinux'
   #end
