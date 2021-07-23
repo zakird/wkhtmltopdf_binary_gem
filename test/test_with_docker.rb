@@ -1,9 +1,13 @@
 require 'minitest/autorun'
 
+def macos?
+  ENV['RUNNER_OS'] && ENV['RUNNER_OS'] == 'macOS'
+end
+
 class WithDockerTest < Minitest::Test
   # Run code before a group of test (see: https://github.com/seattlerb/minitest#how-to-run-code-before-a-group-of-tests)
   SETUP = begin
-    `docker-compose build`
+    `docker-compose build` unless macos?
   end
 
   #def test_centos_6
@@ -43,12 +47,12 @@ class WithDockerTest < Minitest::Test
   #end
 
   def test_with_macos
-    assert_equal `bin/wkhtmltopdf --version`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)'
+    assert_equal `bin/wkhtmltopdf --version`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)' if macos?
   end
 
   private
 
   def test(with:)
-    assert_equal `docker-compose run --rm #{with}`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)'
+    assert_equal `docker-compose run --rm #{with}`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)' unless macos?
   end
 end
