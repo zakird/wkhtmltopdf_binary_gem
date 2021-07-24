@@ -25,21 +25,21 @@ class WithDockerTest < Minitest::Test
    test with: 'debian_9'
   end
 
-  #def test_debian_10
-  #  test with: 'debian_10'
-  #end
+  def test_debian_10
+   test with: 'debian_10'
+  end
 
-  #def test_with_ubuntu_16
-  #  test with: 'ubuntu_16.04'
-  #end
+  def test_with_ubuntu_16
+   test with: 'ubuntu_16.04'
+  end
 
-  #def test_with_ubuntu_18
-  #  test with: 'ubuntu_18.04'
-  #end
+  def test_with_ubuntu_18
+   test with: 'ubuntu_18.04'
+  end
 
-  #def test_with_ubuntu_20
-  #  test with: 'ubuntu_20.04'
-  #end
+  def test_with_ubuntu_20
+   test with: 'ubuntu_20.04'
+  end
 
   #def test_with_deepin
   #  test with: 'deepin'
@@ -49,13 +49,13 @@ class WithDockerTest < Minitest::Test
   #  test with: 'archlinux'
   #end
 
-  #def test_with_macos
-  #  assert_equal `bin/wkhtmltopdf --version`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)' if macos?
-  #end
+  def test_with_macos
+   assert_equal(`bin/wkhtmltopdf --version`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)') if macos?
+  end
 
   private
 
   def test(with:)
-    assert_equal `docker-compose run --rm #{with}`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)' unless macos?
+    assert_equal(`docker-compose run --rm #{with}`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)') unless macos?
   end
 end
