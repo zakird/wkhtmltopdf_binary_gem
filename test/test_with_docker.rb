@@ -21,9 +21,9 @@ class WithDockerTest < Minitest::Test
    test with: 'centos_8'
   end
 
-  #def test_debian_9
-  #  test with: 'debian_9'
-  #end
+  def test_debian_9
+   test with: 'debian_9'
+  end
 
   #def test_debian_10
   #  test with: 'debian_10'

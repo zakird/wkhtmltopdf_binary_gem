@@ -23,12 +23,12 @@ services:
   #   volumes:
   #     - .:/root/wkhtmltopdf_binary_gem
 
-  # debian_9:
-  #   build:
-  #     context: .
-  #     dockerfile: .docker/Dockerfile-debian_9
-  #   volumes:
-  #     - .:/root/wkhtmltopdf_binary_gem
+  debian_9:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_9
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
 
   # debian_10:
   #   build:
