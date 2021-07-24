@@ -41,13 +41,9 @@ class WithDockerTest < Minitest::Test
    test with: 'ubuntu_20.04'
   end
 
-  #def test_with_deepin
-  #  test with: 'deepin'
-  #end
-
-  #def test_with_archlinux
-  #  test with: 'archlinux'
-  #end
+  def test_with_archlinux
+   test with: 'archlinux'
+  end
 
   def test_with_macos
    assert_equal(`bin/wkhtmltopdf --version`.strip, 'wkhtmltopdf 0.12.6 (with patched qt)') if macos?

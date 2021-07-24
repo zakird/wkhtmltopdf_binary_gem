@@ -58,16 +58,9 @@ services:
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
-  # deepin:
-  #   build:
-  #     context: .
-  #     dockerfile: .docker/Dockerfile-deepin
-  #   volumes:
-  #     - .:/root/wkhtmltopdf_binary_gem
-
-  # archlinux:
-  #   build:
-  #     context: .
-  #     dockerfile: .docker/Dockerfile-archlinux
-  #   volumes:
-  #     - .:/root/wkhtmltopdf_binary_gem
+  archlinux:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-archlinux
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
