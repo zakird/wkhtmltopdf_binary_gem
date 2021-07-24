@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Ruby ${{ matrix.ruby-version }}
+      - name: Install Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
@@ -20,5 +20,5 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-      - name: Run tests with Ruby ${{ matrix.ruby-version }}
+      - name: Run tests with Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
         run: bundle exec rake
