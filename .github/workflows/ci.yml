@@ -4,20 +4,9 @@ on: [push, pull_request]
 
 jobs:
   vagrantfile:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest]
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Vagrant cache of box
-        uses: actions/cache@v2
-        with:
-          path: ~/.vagrant.d/boxes
-          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
-          restore-keys: |
-            ${{ runner.os }}-vagrant-
 
       - name: Vagrant version
         run: vagrant --version
@@ -25,14 +14,17 @@ jobs:
       - name: Vagrant up
         run: vagrant up
 
-      - name: Vagrant ouput - Docker
+      - name: Vagrant output - Docker
         run: vagrant ssh -c "docker --version"
 
-      - name: Vagrant ouput - Docker compose
+      - name: Vagrant output - Docker compose
         run: vagrant ssh -c "docker-compose --version"
 
-      - name: Vagrant ouput - Ruby
+      - name: Vagrant output - Ruby
         run: vagrant ssh -c "ruby --version"
 
-      - name: Vagrant ouput - Bundler
+      - name: Vagrant output - Bundler
         run: vagrant ssh -c "bundler --version"
+
+      - name: Vagrant output - Linux-only tests
+        run: vagrant ssh -c "cd /vagrant/ && RUNNER_OS=Linux bundle exec rake"
