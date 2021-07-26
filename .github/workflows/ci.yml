@@ -10,6 +10,14 @@ jobs:
         os: [macos-latest]
     steps:
       - uses: actions/checkout@v2
+      
+      - name: Vagrant cache of box
+        uses: actions/cache@v2
+        with:
+          path: ~/.vagrant.d/boxes
+          key: ${{ runner.os }}-vagrant-${{ hashFiles('Vagrantfile') }}
+          restore-keys: |
+            ${{ runner.os }}-vagrant-
 
       - name: Vagrant version
         run: vagrant --version
