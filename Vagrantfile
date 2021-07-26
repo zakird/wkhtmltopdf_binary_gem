@@ -4,7 +4,9 @@ Vagrant.configure("2") do |config|
     export DEBIAN_FRONTEND=noninteractive
     export RUNNER_OS=Linux
     sudo apt-get update -y
-    sudo apt-get install docker.io docker-compose ruby
+    sudo apt-get install -y docker.io docker-compose ruby
+    cd /vagrant
+    bundle install
     echo "END OF SCRIPT ..."
   SHELL
 end
