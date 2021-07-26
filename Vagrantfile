@@ -5,8 +5,8 @@ Vagrant.configure("2") do |config|
     export RUNNER_OS=Linux
     sudo apt-get update -y
     sudo apt-get install -y docker.io docker-compose ruby
+    gem install bundler
     cd /vagrant
     bundle install
-    echo "END OF SCRIPT ..."
   SHELL
 end
