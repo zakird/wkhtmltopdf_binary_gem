@@ -14,8 +14,11 @@ jobs:
       - name: Vagrant up
         run: vagrant up
 
-      - name: Vagrant output - Docker
+      - name: Vagrant output - Docker Engine
         run: vagrant ssh -c "docker --version"
+
+      - name: Vagrant output - Docker Daemon
+        run: vagrant ssh -c "sudo systemctl start dockerd && systemctl status dockerd"
 
       - name: Vagrant output - Docker compose
         run: vagrant ssh -c "docker-compose --version"
