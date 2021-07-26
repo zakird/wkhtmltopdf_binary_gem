@@ -25,5 +25,14 @@ jobs:
       - name: Vagrant up
         run: vagrant up
 
-      - name: Test Vagrant ouput
-        run: vagrant ssh -c "echo 'hello world!'"
+      - name: Vagrant ouput - Docker
+        run: vagrant ssh -c "docker --version"
+
+      - name: Vagrant ouput - Docker compose
+        run: vagrant ssh -c "docker-compose --version"
+
+      - name: Vagrant ouput - Ruby
+        run: vagrant ssh -c "ruby --version"
+
+      - name: Vagrant ouput - Bundler
+        run: vagrant ssh -c "bundler --version"
