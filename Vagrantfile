@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
     export DEBIAN_FRONTEND=noninteractive
     sudo apt-get update -y
     sudo apt-get install -y docker.io docker-compose ruby
+    sudo service docker restart
     gem install bundler
     cd /vagrant
     bundle install
