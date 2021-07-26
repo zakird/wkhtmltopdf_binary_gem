@@ -1,5 +1,6 @@
 .DS_Store
 pkg/*
+Gemfile.lock
 bin/wkhtmltopdf_centos_6_amd64
 bin/wkhtmltopdf_centos_7_amd64
 bin/wkhtmltopdf_centos_8_amd64

@@ -13,4 +13,5 @@ Gem::Specification.new do |s|
   s.require_path = '.'
 
   s.add_development_dependency "minitest"
+  s.add_development_dependency "rake"
 end

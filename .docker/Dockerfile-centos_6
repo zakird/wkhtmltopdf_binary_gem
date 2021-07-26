@@ -1,5 +1,9 @@
 FROM centos:6
 
-RUN yum install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext
+RUN rm -f /etc/yum.repos.d/CentOS-Base.repo && \
+    sed -i "s/enabled=0/enabled=1/g" /etc/yum.repos.d/CentOS-Vault.repo && \
+    yum clean all && \
+    yum update -y && \
+    yum install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext
 
 CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version
