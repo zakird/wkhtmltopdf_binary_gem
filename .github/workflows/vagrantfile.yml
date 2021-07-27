@@ -35,4 +35,4 @@ jobs:
         run: vagrant ssh -c "pwd"
 
       - name: Vagrant output - Linux tests
-        run: vagrant ssh -c "bundle exec rake"
+        run: vagrant ssh -c "sudo su && cd /vagrant && RUNNER_OS=Linux bundle exec rake"
