@@ -27,4 +27,4 @@ jobs:
         run: vagrant ssh -c "bundler --version"
 
       - name: Vagrant output - Linux-only tests
-        run: vagrant ssh -c "sudo su && cd /vagrant/ && RUNNER_OS=Linux bundle exec rake"
+        run: vagrant ssh -c "bundle exec rake"
