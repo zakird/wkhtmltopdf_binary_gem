@@ -28,5 +28,11 @@ jobs:
       - name: Vagrant output - Bundler
         run: vagrant ssh -c "bundler --version"
 
+      - name: Vagrant output - Default user
+        run: vagrant ssh -c "whoami"
+
+      - name: Vagrant output - Default folder
+        run: vagrant ssh -c "pwd"
+
       - name: Vagrant output - Linux tests
         run: vagrant ssh -c "bundle exec rake"
