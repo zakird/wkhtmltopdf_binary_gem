@@ -2,7 +2,7 @@ name: Vagrantfile
 
 on:
   push:
-    branches: [master, vagrantfile]
+    branches: [master]
 
 jobs:
   tests:
