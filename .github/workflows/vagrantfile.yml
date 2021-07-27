@@ -1,0 +1,32 @@
+name: Vagrantfile
+
+on:
+  push:
+    branches: [master, vagrantfile]
+
+jobs:
+  tests:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Vagrant version
+        run: vagrant --version
+
+      - name: Vagrant up
+        run: vagrant up
+
+      - name: Vagrant output - Docker Engine
+        run: vagrant ssh -c "docker --version"
+
+      - name: Vagrant output - Docker compose
+        run: vagrant ssh -c "docker-compose --version"
+
+      - name: Vagrant output - Ruby
+        run: vagrant ssh -c "ruby --version"
+
+      - name: Vagrant output - Bundler
+        run: vagrant ssh -c "bundler --version"
+
+      - name: Vagrant output - Linux tests
+        run: vagrant ssh -c "bundle exec rake"
