@@ -3,28 +3,22 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-  vagrantfile:
-    runs-on: macos-latest
+  tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        ruby-version: [2.3, 2.4, 2.5, 2.6, 2.7, 3.0]
     steps:
       - uses: actions/checkout@v2
 
-      - name: Vagrant version
-        run: vagrant --version
+      - name: Install Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
 
-      - name: Vagrant up
-        run: vagrant up
+      - name: Install dependencies
+        run: bundle install
 
-      - name: Vagrant output - Docker Engine
-        run: vagrant ssh -c "docker --version"
-
-      - name: Vagrant output - Docker compose
-        run: vagrant ssh -c "docker-compose --version"
-
-      - name: Vagrant output - Ruby
-        run: vagrant ssh -c "ruby --version"
-
-      - name: Vagrant output - Bundler
-        run: vagrant ssh -c "bundler --version"
-
-      - name: Vagrant output - Linux-only tests
-        run: vagrant ssh -c "bundle exec rake"
+      - name: Run tests with Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+        run: bundle exec rake
