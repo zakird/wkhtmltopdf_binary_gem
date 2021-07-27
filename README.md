@@ -31,7 +31,7 @@ Giving write access whatever user is running your program (e.g. web server, back
 
 ## Extracting binaries
 
-Hints for extracting binaries from https://wkhtmltopdf.org/downloads.html (dpkg and rpm2cpio is available on Homebrew):
+Hints for extracting binaries from https://wkhtmltopdf.org/downloads.html (dpkg and rpm2cpio is available on Homebrew).
 
 Debian/Ubuntu
 
