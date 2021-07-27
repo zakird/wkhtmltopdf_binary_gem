@@ -68,5 +68,5 @@ Then, execute the commands below:
 git clone https://github.com/zakird/wkhtmltopdf_binary_gem
 cd wkhtmltopdf_binary_gem/
 vagrant up
-vagrant ssh -c 'bundle exec rake'
+vagrant ssh -c "sudo su && cd /vagrant && RUNNER_OS=Linux bundle exec rake"
 ```
