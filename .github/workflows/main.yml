@@ -1,16 +1,17 @@
-name: Build and Publish Ruby Gem on Tag Pushes
+name: Build and Publish Ruby Gem to the GitHub RubyGems registry
 on:
-  push:
-    tags:
-      - 'v*.*.*.*'
+  # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#release
+  release:
+    types:
+    - released
 
 jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
-    - name: Build and Publish Ruby Gem on Tag Pushes
-      uses: bodyshopbidsdotcom/gh-action-publish-gem-on-tag@master
+    - name: Build and publish gem
+      uses: jstastny/publish-gem-to-github@master
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         owner: ${{ github.repository_owner }}
