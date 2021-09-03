@@ -1,9 +1,12 @@
 name: Build and Publish Ruby Gem to the GitHub RubyGems registry
 on:
+  # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#workflow_dispatch
+  workflow_dispatch: # GITHUB_SHA: Last commit on the GITHUB_REF branch
   # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#release
   release:
     types:
     - released
+
 
 jobs:
   build:
