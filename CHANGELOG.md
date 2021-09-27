@@ -1,6 +1,7 @@
 # 0.12.6.x
 
 - Setup of Github action automation for Linux/MacOS builds
+- Binary for Debian 9 arm64
 
 # 0.12.6.5
 
