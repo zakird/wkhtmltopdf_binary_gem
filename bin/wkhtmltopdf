@@ -40,7 +40,7 @@ suffix = case RbConfig::CONFIG['host_os']
                                   os.start_with?('deepin')
            os = 'debian_9' if os_based_on_debian_9
            architecture ||= 'arm64' if os_based_on_debian_9 && 
-                                       host_cpu == 'arm64'
+                                       (host_cpu == 'arm64' || host_cpu == 'aarch64' || host_cpu == 'arch64')
 
            os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian')
 
