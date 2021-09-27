@@ -39,13 +39,15 @@ suffix = case RbConfig::CONFIG['host_os']
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
            os = 'debian_9' if os_based_on_debian_9
+           architecture ||= 'arm64' if os_based_on_debian_9 && 
+                                       host_cpu == 'arm64'
 
            os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian')
 
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
 
-           architecture ||= host_cpu == 'x86_64' ? 'amd64' : host_cpu
+           architecture ||= host_cpu == 'x86_64' ? 'amd64' : 'i386'
 
            "#{os}_#{architecture}"
          when /darwin/
