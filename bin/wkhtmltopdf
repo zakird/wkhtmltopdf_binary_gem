@@ -55,8 +55,6 @@ suffix = case RbConfig::CONFIG['host_os']
 
 suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
-binary = ENV['WKHTMLTOPDF_BINARY']
-
 binary ||= "#{__FILE__}_#{suffix}"
 
 if File.exist?("#{binary}.gz") && !File.exist?(binary)
