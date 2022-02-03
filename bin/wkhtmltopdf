@@ -32,6 +32,8 @@ suffix = case RbConfig::CONFIG['host_os']
 
            os = 'centos_7' if (os.start_with?('amzn_2') && !os.start_with?('amzn_20')) ||
                               os.start_with?('rhel_7.')
+           
+           os = "centos_8" if (os.start_with?('rocky_8'))
 
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
@@ -53,7 +55,9 @@ suffix = case RbConfig::CONFIG['host_os']
 
 suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
-binary = "#{__FILE__}_#{suffix}"
+binary = ENV['WKHTMLTOPDF_BINARY']
+
+binary ||= "#{__FILE__}_#{suffix}"
 
 if File.exist?("#{binary}.gz") && !File.exist?(binary)
   File.open binary, 'wb', 0o755 do |file|
