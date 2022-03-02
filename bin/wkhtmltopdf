@@ -9,53 +9,145 @@
 
 require 'rbconfig'
 require 'zlib'
+require 'net/http'
+
+links = [
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win32.exe',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.mxe-cross-win64.7z',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.mxe-cross-win32.7z',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-2/wkhtmltox-0.12.6-2.macos-cocoa.pkg',
+
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_i386.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_arm64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_ppc64le.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.raspberrypi.buster_armhf.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_amd64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_i386.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.stretch_arm64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.raspberrypi.stretch_armhf.deb',
+
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_amd64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_arm64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.focal_ppc64le.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_amd64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_i386.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_arm64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.bionic_ppc64le.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.xenial_amd64.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.xenial_i386.deb',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.xenial_arm64.deb',
+
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.x86_64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.aarch64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.ppc64le.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.x86_64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.i686.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.aarch64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos7.ppc64le.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos6.x86_64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos6.i686.rpm',
+
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.amazonlinux2.x86_64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.amazonlinux2.aarch64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-4/wkhtmltox-0.12.6-4.amazonlinux2_lambda.zip',
+
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.opensuse.leap15.x86_64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.opensuse.leap15.aarch64.rpm',
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.opensuse.leap15.ppc64le.rpm',
+
+    'https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-3/wkhtmltox-0.12.6-3.archlinux-x86_64.pkg.tar.xz',
+]
+
+matrix = {}
+
+links.each do |link|
+    version, binary = link.sub('https://github.com/wkhtmltopdf/packaging/releases/download/','').split('/')
+    binary.sub!(/wkhtmltox[-_]#{version}\./, '')
+
+    platform, architecture = binary.split(/[\.\-\_]/,2)
+    architecture.sub!(/\.(pkg\.tar\.xz|rpm|deb|zip|exe|pkg|7z)/,'')
+
+    matrix[platform] ||= {}
+    matrix[platform][architecture] = link
+end
+
+matrix
+
 
 suffix = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
-           os = 'ubuntu_16.04' if os.start_with?('ubuntu_16.') ||
+           os = 'xenial' if os.start_with?('ubuntu_16.') ||
                                   os.start_with?('ubuntu_17.')
 
-           os = 'ubuntu_18.04' if os.start_with?('ubuntu_18.') ||
+           os = 'bionic' if os.start_with?('ubuntu_18.') ||
                                   os.start_with?('ubuntu_19.') ||
                                   os.start_with?('elementary') ||
                                   os.start_with?('linuxmint') ||
                                   os.start_with?('pop') ||
                                   os.start_with?('zorin')
 
-           os = 'ubuntu_20.04' if os.start_with?('ubuntu_20.') ||
+           os = 'focal' if os.start_with?('ubuntu_20.') ||
                                   os.start_with?('ubuntu_21.')
 
-           os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
+           os = 'centos6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
                               (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6'))
 
-           os = 'centos_7' if (os.start_with?('amzn_2') && !os.start_with?('amzn_20')) ||
-                              os.start_with?('rhel_7.')
+           os = 'centos7' if os.start_with?('rhel_7.') ||
+                              os.start_with?('centos_7')
            
-           os = "centos_8" if os.start_with?('rocky_8')
+           os = 'centos8' if os.start_with?('rocky_8') ||
+                              os.start_with?('centos_8')
+
+           os = 'amazonlinux2' if os.start_with?('amzn_2') && !os.start_with?('amzn_20')
 
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
-           os = 'debian_9' if os_based_on_debian_9
+           os = 'stretch' if os_based_on_debian_9
 
-           os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian')
+           os = 'buster' if !os_based_on_debian_9 && os.start_with?('debian')
 
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
 
-           architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
+           architecture = case RbConfig::CONFIG['host_cpu']
+                          when /x86_64/
+                            %w[xenial focal bionic stretch buster].any?{|d| os == d} ? 'amd64' : 'x86_64'
+                          when /aarch64/
+                            %w[xenial focal bionic stretch buster].any?{|d| os == d} ? 'arm64' : 'aarch64'
+                          when /arm64/
+                            'arm64'
+                          else
+                            'i386'
+                          end
 
-           "#{os}_#{architecture}"
+           [os, architecture]
          when /darwin/
-           'macos_cocoa'
+           ['macos', 'cocoa']
          else
-           'unknown'
+           ['unknown', 'unknown']
          end
 
 suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
-binary = "#{__FILE__}_#{suffix}"
+path = matrix[suffix[0]][suffix[1]]
+file_name = path.split('/')[-1]
+
+binary = "wkhtmltopdf_#{suffix[0]}_#{suffix[1]}"
+
+binary = "#{__FILE__}_#{binary}"
+
+if !File.exist?("#{binary}.gz")
+  `curl "#{path}" --output "#{file_name}"`
+  `rpm2cpio "#{file_name}"" | cpio -idmv` if file_name.end_with?('.rpm')
+  `dpkg -x "#{file_name}" .` if file_name.end_with?('.deb')
+  `tar -xf "#{file_name}"` if file_name.end_with?('.tar.xz')
+  `xar -xf "#{file_name}"; cat Payload | gunzip -dc | cpio -i` if file_name.end_with?('.pkg')
+  `gzip --best -c usr/local/bin/wkhtmltopdf > #{binary}.gz`
+end
 
 if File.exist?("#{binary}.gz") && !File.exist?(binary)
   File.open binary, 'wb', 0o755 do |file|
