@@ -75,6 +75,7 @@ gem_directory = File.expand_path(File.dirname(__FILE__))
 downloaded_file_name = gem_directory + "/" + download_path.split('/')[-1]
 
 binary = "#{__FILE__}_#{suffix}"
+binary = "#{gem_directory}/#{binary}".sub('bin/bin', 'bin') unless binary.start_with?(gem_directory)
 
 Dir.chdir(gem_directory) do
   if !File.exist?("#{binary}.gz")
@@ -83,7 +84,7 @@ Dir.chdir(gem_directory) do
     `dpkg -x "#{downloaded_file_name}" .` if downloaded_file_name.end_with?('.deb')
     `tar -xf "#{downloaded_file_name}"` if downloaded_file_name.end_with?('.tar.xz')
     if downloaded_file_name.end_with?('.pkg')
-      `xar xf "#{downloaded_file_name}"; cat Payload | gunzip -dc | cpio -i`
+      `xar -xf "#{downloaded_file_name}"; cat Payload | gunzip -dc | cpio -i`
       `cp "#{gem_directory}/usr/local/share/wkhtmltox-installer/wkhtmltox.tar.gz" "#{binary}.gz"`
     elsif downloaded_file_name.end_with?('.tar.xz')
       `gzip --best --quiet -c usr/bin/wkhtmltopdf > #{binary}.gz`
