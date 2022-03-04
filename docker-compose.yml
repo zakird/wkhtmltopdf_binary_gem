@@ -6,69 +6,55 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile-ubuntu_16.04
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   ubuntu_18.04:
     build:
       context: .
       dockerfile: .docker/Dockerfile-ubuntu_18.04
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   ubuntu_20.04:
     build:
       context: .
       dockerfile: .docker/Dockerfile-ubuntu_20.04
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   debian_9:
     build:
       context: .
       dockerfile: .docker/Dockerfile-debian_9
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   debian_10:
     build:
       context: .
       dockerfile: .docker/Dockerfile-debian_10
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   centos_6:
     platform: linux/x86_64
     build:
       context: .
       dockerfile: .docker/Dockerfile-centos_6
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   centos_7:
     build:
       context: .
       dockerfile: .docker/Dockerfile-centos_7
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   centos_8:
     build:
       context: .
       dockerfile: .docker/Dockerfile-centos_8
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
+
   rockylinux_8:
     build:
       context: .
       dockerfile: .docker/Dockerfile-rockylinux_8
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
 
   archlinux:
     platform: linux/x86_64
     build:
       context: .
       dockerfile: .docker/Dockerfile-archlinux
-    volumes:
-      - .:/root/wkhtmltopdf_binary_gem
+
+  amazonlinux2:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-amazonlinux2

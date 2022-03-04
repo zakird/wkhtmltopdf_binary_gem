@@ -13,4 +13,7 @@ RUN cd openssl-1.1.1k && ./config --prefix=/usr --openssldir=/etc/ssl --libdir=l
 
 RUN ldconfig
 
+WORKDIR /root/wkhtmltopdf_binary_gem
+COPY . .
+
 CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version

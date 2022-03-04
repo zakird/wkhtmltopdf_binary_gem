@@ -6,7 +6,7 @@ end
 
 class WithDockerTest < Minitest::Test
   SETUP = begin
-    `docker-compose build --no-cache` unless macos?
+    `docker-compose build` unless macos?
   end
 
   def test_centos_6
@@ -47,6 +47,10 @@ class WithDockerTest < Minitest::Test
   
   def test_rockylinux_8
    test with: 'rockylinux_8'
+  end
+
+  def test_with_amazonlinux2
+    test with: 'amazonlinux2'
   end
   
   def test_with_macos

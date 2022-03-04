@@ -6,4 +6,7 @@ RUN rm -f /etc/yum.repos.d/CentOS-Base.repo && \
     yum update -y && \
     yum install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext
 
+WORKDIR /root/wkhtmltopdf_binary_gem
+COPY . .
+
 CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version
