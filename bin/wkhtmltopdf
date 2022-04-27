@@ -57,7 +57,7 @@ suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to
 
 binary = "#{__FILE__}_#{suffix}"
 
-if File.exist?("#{binary}.gz") && !File.exist?(binary)
+if File.exist?("#{binary}.gz") && (!File.exist?(binary) || (File.exist?(binary) && File.size(binary) == 0))
   File.open binary, 'wb', 0o755 do |file|
     Zlib::GzipReader.open("#{binary}.gz") { |gzip| file << gzip.read }
   end
