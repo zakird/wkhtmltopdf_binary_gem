@@ -30,7 +30,7 @@ class WithDockerTest < Minitest::Test
   end
 
   def test_debian_11
-   test with: 'debian_11'
+   assert_equal(`docker-compose run --rm debian_11`.strip, 'wkhtmltopdf 0.12.6.1 (with patched qt)') unless macos?
   end
 
   def test_with_ubuntu_16
