@@ -23,6 +23,13 @@ services:
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
+  ubuntu_22.04:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-ubuntu_22.04
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
   debian_9:
     build:
       context: .

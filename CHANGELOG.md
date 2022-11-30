@@ -2,6 +2,10 @@
 
 - Setup of Github action automation for Linux/MacOS builds
 
+# 0.12.6.6
+
+Add support for Ubuntu 22.04
+
 # 0.12.6.5
 
 Fix ability to use on Debian 9 systems

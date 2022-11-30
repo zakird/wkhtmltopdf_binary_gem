@@ -51,6 +51,12 @@ macOS
 Binaries should be compressed with `gzip --best` after extracting. The matching binary will be extracted on first
 execution of `bin/wkhtmltopdf`.
 
+Hints for compressing binaries
+
+Debian/Ubuntu
+    user/local/bin refers to the extracted binaries directory
+    gzip --best -c usr/local/bin/wkhtmltopdf > wkhtmltopdf_ubuntu_22.04.amd64.gz
+
 ## Testing
 
 To execute gem tests locally, install in your OS:
