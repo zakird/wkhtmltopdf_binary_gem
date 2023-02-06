@@ -15,19 +15,22 @@ suffix = case RbConfig::CONFIG['host_os']
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
            os = 'ubuntu_16.04' if os.start_with?('ubuntu_16.') ||
-                                  os.start_with?('ubuntu_17.')
+                                  os.start_with?('ubuntu_17.') ||
+                                  os.start_with?('linuxmint_18.')
 
            os = 'ubuntu_18.04' if os.start_with?('ubuntu_18.') ||
                                   os.start_with?('ubuntu_19.') ||
                                   os.start_with?('elementary') ||
-                                  os.start_with?('linuxmint') ||
+                                  os.start_with?('linuxmint_19.') ||
                                   os.start_with?('pop') ||
                                   os.start_with?('zorin')
 
            os = 'ubuntu_20.04' if os.start_with?('ubuntu_20.') ||
-                                  os.start_with?('ubuntu_21.')
+                                  os.start_with?('ubuntu_21.') ||
+                                  os.start_with?('linuxmint_20.')
 
-           os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.')
+           os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
+                                  os.start_with?('linuxmint_21.')
 
            os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
                               (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6'))
