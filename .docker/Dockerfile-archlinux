@@ -4,4 +4,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN pacman -Sy --noconfirm ruby fontconfig freetype2 libjpeg libpng libxext libxrender
 
+WORKDIR /root/wkhtmltopdf_binary_gem
+COPY . .
+
 CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version
+# CMD /bin/bash

@@ -1,0 +1,4 @@
+bin/*
+!bin/download_link_matrix.rb
+!bin/wkhtmltopdf
+!bin/wkhtmltopdf-binary.rb

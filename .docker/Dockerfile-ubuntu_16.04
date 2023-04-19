@@ -3,6 +3,9 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update
-RUN apt-get install -y ruby libjpeg8 libxrender1 libfontconfig1
+RUN apt-get install -y ruby libjpeg-turbo8 libxrender1:arm64 libxtst6:arm64 libfontconfig1 curl
+
+WORKDIR /root/wkhtmltopdf_binary_gem
+COPY . .
 
 CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version

@@ -1,0 +1,8 @@
+FROM amazonlinux:2
+
+RUN yum install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext gzip
+
+WORKDIR /root/wkhtmltopdf_binary_gem
+COPY . .
+
+CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version

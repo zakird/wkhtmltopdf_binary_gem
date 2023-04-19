@@ -9,69 +9,107 @@
 
 require 'rbconfig'
 require 'zlib'
+require File.expand_path(File.dirname(__FILE__) + '/download_link_matrix')
 
-suffix = case RbConfig::CONFIG['host_os']
+os_architecture = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
-           os = 'ubuntu_16.04' if os.start_with?('ubuntu_16.') ||
+           os = 'xenial' if os.start_with?('ubuntu_16.') ||
                                   os.start_with?('ubuntu_17.') ||
                                   os.start_with?('linuxmint_18.')
 
-           os = 'ubuntu_18.04' if os.start_with?('ubuntu_18.') ||
+           os = 'bionic' if os.start_with?('ubuntu_18.') ||
                                   os.start_with?('ubuntu_19.') ||
                                   os.start_with?('elementary') ||
                                   os.start_with?('linuxmint_19.') ||
                                   os.start_with?('pop') ||
                                   os.start_with?('zorin')
 
-           os = 'ubuntu_20.04' if os.start_with?('ubuntu_20.') ||
+           os = 'focal' if os.start_with?('ubuntu_20.') ||
                                   os.start_with?('ubuntu_21.') ||
                                   os.start_with?('linuxmint_20.')
 
-           os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
+           os = 'jammy' if os.start_with?('ubuntu_22.') ||
                                   os.start_with?('linuxmint_21.')
 
-           os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
+           os = 'centos6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
+                              os.start_with?('centos_6') ||
                               (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6'))
 
-           os = 'centos_7' if (os.start_with?('amzn_2') && !os.start_with?('amzn_20')) ||
-                              os.start_with?('rhel_7.')
+           os = 'centos7' if os.start_with?('rhel_7.') ||
+                              os.start_with?('centos_7')
+           
+           os = 'centos8' if os.start_with?('rocky_8') ||
+                              os.start_with?('centos_8') ||
+                              os.start_with?('rhel_8.')
 
-           os = 'centos_8' if os.start_with?('rocky_8') || os.start_with?('rhel_8.')
+           os = 'amazonlinux2' if os.start_with?('amzn_2') && !os.start_with?('amzn_20')
 
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
-           os = 'debian_9' if os_based_on_debian_9
+           os = 'stretch' if os_based_on_debian_9
 
-           os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian')
+           os = 'buster' if !os_based_on_debian_9 && os.start_with?('debian')
 
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
+           architecture = case RbConfig::CONFIG['host_cpu']
+                          when /x86_64/
+                            %w[xenial focal bionic stretch buster].any?{|d| os == d} ? 'amd64' : 'x86_64'
+                          when /aarch64/
+                            %w[xenial focal bionic stretch buster].any?{|d| os == d} ? 'arm64' : 'aarch64'
+                          when /arm64/
+                            'arm64'
+                          else
+                            os.start_with?('centos') ? 'i686' : 'i386'
+                          end
 
-           architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
-
-           "#{os}_#{architecture}"
+           [os, architecture]
          when /darwin/
-           'macos_cocoa'
+           ['macos', 'cocoa']
          else
-           'unknown'
+           ['unknown', 'unknown']
          end
 
+download_path = DOWNLOAD_LINK_MATRIX[os_architecture[0]][os_architecture[1]]
+
+suffix = "#{os_architecture[0]}_#{os_architecture[1]}"
 suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to_s.empty?
 
+gem_directory = File.expand_path(File.dirname(__FILE__))
+downloaded_file_name = gem_directory + "/" + download_path.split('/')[-1]
+
 binary = "#{__FILE__}_#{suffix}"
+binary = "#{gem_directory}/#{binary}".sub('bin/bin', 'bin') unless binary.start_with?(gem_directory)
 
-if File.exist?("#{binary}.gz") && !File.exist?(binary)
-  File.open binary, 'wb', 0o755 do |file|
-    Zlib::GzipReader.open("#{binary}.gz") { |gzip| file << gzip.read }
+Dir.chdir(gem_directory) do
+  if !File.exist?("#{binary}.gz")
+    `curl -LJ --silent "#{download_path}" --output "#{downloaded_file_name}"`
+    `rpm2cpio "#{downloaded_file_name}" | cpio -idm --quiet` if downloaded_file_name.end_with?('.rpm')
+    `dpkg -x "#{downloaded_file_name}" .` if downloaded_file_name.end_with?('.deb')
+    `tar -xf "#{downloaded_file_name}"` if downloaded_file_name.end_with?('.tar.xz')
+    if downloaded_file_name.end_with?('.pkg')
+      `xar -xf "#{downloaded_file_name}"; cat Payload | gunzip -dc | cpio -i`
+      `cp "#{gem_directory}/usr/local/share/wkhtmltox-installer/wkhtmltox.tar.gz" "#{binary}.gz"`
+    elsif downloaded_file_name.end_with?('.tar.xz')
+      `gzip --best --quiet -c usr/bin/wkhtmltopdf > #{binary}.gz`
+    else
+      `gzip --best --quiet -c usr/local/bin/wkhtmltopdf > #{binary}.gz`
+    end
   end
-end
 
-unless File.exist? binary
-  raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
-        'CentOS 6/7/8, Debian 9/10, Archlinux amd64, or Intel-based Cocoa macOS ' \
-        "(missing binary: #{binary})."
-end
+  if File.exist?("#{binary}.gz") && !File.exist?("#{binary}")
+    File.open binary, 'wb', 0o755 do |file|
+      Zlib::GzipReader.open("#{binary}.gz") { |gzip| file << gzip.read }
+    end
+  end
 
-exec *$*.unshift(binary)
+  unless File.exist?("#{binary}")
+    raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
+          'CentOS 6/7/8, Debian 9/10, Archlinux amd64, or Intel-based Cocoa macOS ' \
+          "(missing binary: #{binary})."
+  end
+
+  exec *$*.unshift(binary)
+end
