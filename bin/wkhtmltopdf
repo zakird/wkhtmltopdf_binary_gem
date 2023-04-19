@@ -79,7 +79,7 @@ binary = "#{gem_directory}/#{binary}".sub('bin/bin', 'bin') unless binary.start_
 
 Dir.chdir(gem_directory) do
   if !File.exist?("#{binary}.gz")
-    `curl -L --silent "#{download_path}" --output "#{downloaded_file_name}"`
+    `curl -LJ --silent "#{download_path}" --output "#{downloaded_file_name}"`
     `rpm2cpio "#{downloaded_file_name}" | cpio -idm --quiet` if downloaded_file_name.end_with?('.rpm')
     `dpkg -x "#{downloaded_file_name}" .` if downloaded_file_name.end_with?('.deb')
     `tar -xf "#{downloaded_file_name}"` if downloaded_file_name.end_with?('.tar.xz')
