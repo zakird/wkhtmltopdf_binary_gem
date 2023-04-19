@@ -16,17 +16,22 @@ os_architecture = case RbConfig::CONFIG['host_os']
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
            os = 'xenial' if os.start_with?('ubuntu_16.') ||
-                                  os.start_with?('ubuntu_17.')
+                                  os.start_with?('ubuntu_17.') ||
+                                  os.start_with?('linuxmint_18.')
 
            os = 'bionic' if os.start_with?('ubuntu_18.') ||
                                   os.start_with?('ubuntu_19.') ||
                                   os.start_with?('elementary') ||
-                                  os.start_with?('linuxmint') ||
+                                  os.start_with?('linuxmint_19.') ||
                                   os.start_with?('pop') ||
                                   os.start_with?('zorin')
 
            os = 'focal' if os.start_with?('ubuntu_20.') ||
-                                  os.start_with?('ubuntu_21.')
+                                  os.start_with?('ubuntu_21.') ||
+                                  os.start_with?('linuxmint_20.')
+
+           os = 'jammy' if os.start_with?('ubuntu_22.') ||
+                                  os.start_with?('linuxmint_21.')
 
            os = 'centos6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
                               os.start_with?('centos_6') ||
@@ -36,7 +41,8 @@ os_architecture = case RbConfig::CONFIG['host_os']
                               os.start_with?('centos_7')
            
            os = 'centos8' if os.start_with?('rocky_8') ||
-                              os.start_with?('centos_8')
+                              os.start_with?('centos_8') ||
+                              os.start_with?('rhel_8.')
 
            os = 'amazonlinux2' if os.start_with?('amzn_2') && !os.start_with?('amzn_20')
 
@@ -100,7 +106,7 @@ Dir.chdir(gem_directory) do
   end
 
   unless File.exist?("#{binary}")
-    raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04, ' \
+    raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
           'CentOS 6/7/8, Debian 9/10, Archlinux amd64, or Intel-based Cocoa macOS ' \
           "(missing binary: #{binary})."
   end
