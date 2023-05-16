@@ -1,0 +1,8 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update
+RUN apt-get install -y ruby libjpeg8 libxrender1 libfontconfig1
+
+CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version

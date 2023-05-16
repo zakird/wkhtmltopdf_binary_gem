@@ -15,17 +15,22 @@ suffix = case RbConfig::CONFIG['host_os']
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
 
            os = 'ubuntu_16.04' if os.start_with?('ubuntu_16.') ||
-                                  os.start_with?('ubuntu_17.')
+                                  os.start_with?('ubuntu_17.') ||
+                                  os.start_with?('linuxmint_18.')
 
            os = 'ubuntu_18.04' if os.start_with?('ubuntu_18.') ||
                                   os.start_with?('ubuntu_19.') ||
                                   os.start_with?('elementary') ||
-                                  os.start_with?('linuxmint') ||
+                                  os.start_with?('linuxmint_19.') ||
                                   os.start_with?('pop') ||
                                   os.start_with?('zorin')
 
            os = 'ubuntu_20.04' if os.start_with?('ubuntu_20.') ||
-                                  os.start_with?('ubuntu_21.')
+                                  os.start_with?('ubuntu_21.') ||
+                                  os.start_with?('linuxmint_20.')
+
+           os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
+                                  os.start_with?('linuxmint_21.')
 
            os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
                               (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6'))
@@ -66,8 +71,8 @@ if File.exist?("#{binary}.gz") && !File.exist?(binary)
 end
 
 unless File.exist? binary
-  raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04, ' \
-        'CentOS 6/7/8, Debian 9/10/11, Archlinux amd64, or Intel-based Cocoa macOS ' \
+  raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
+        'CentOS 6/7/8, Debian 9/10, Archlinux amd64, or Intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 
