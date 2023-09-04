@@ -30,7 +30,8 @@ suffix = case RbConfig::CONFIG['host_os']
                                   os.start_with?('linuxmint_20.')
 
            os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
-                                  os.start_with?('linuxmint_21.')
+                                  os.start_with?('linuxmint_21.') ||
+                                  os.start_with?('tuxedo_22.')
 
            os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
                               (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6'))
