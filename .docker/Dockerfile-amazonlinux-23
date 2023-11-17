@@ -1,0 +1,6 @@
+FROM amazonlinux:2023
+
+RUN yum update -y && \
+    yum install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext openssl
+
+CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version

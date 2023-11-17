@@ -64,6 +64,7 @@ services:
       dockerfile: .docker/Dockerfile-centos_8
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
+
   rockylinux_8:
     build:
       context: .
@@ -75,5 +76,12 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile-archlinux
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  amazonlinux_23:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-amazonlinux_23
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
