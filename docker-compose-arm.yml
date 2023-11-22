@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  debian_9:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_9_arm
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_10:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_10_arm
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_11:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_11_arm
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_12:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_12_arm
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
