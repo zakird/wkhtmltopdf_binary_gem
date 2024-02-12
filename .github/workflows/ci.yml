@@ -1,18 +1,54 @@
 name: CI
-
+on: [push, pull_request]
 on: [push, pull_request]
 
+
+jobs:
 jobs:
   tests:
+  tests-on-x86-mac:
     runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
+    strategy:
     strategy:
       matrix:
+      matrix:
         os: [ubuntu-latest, macos-latest]
+        ruby-version: ['2.3', '2.4', '2.5', '2.6', '2.7', '3.0', '3.1', '3.2']
         ruby-version: ['2.3', '2.4', '2.5', '2.6', '2.7', '3.0', '3.1']
     steps:
+    steps:
       - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+
 
       - name: Install Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+      - name: Install Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
+        with:
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Install dependencies
+      - name: Install dependencies
+        run: bundle install
+        run: bundle install
+
+
+      - name: Run tests with Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+      - name: Run tests with Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+        run: bundle exec rake
+        run: bundle exec rake
+  tests-on-x86-docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.2']
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Ruby ${{ matrix.ruby-version }} on ubuntu
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
@@ -20,5 +56,30 @@ jobs:
       - name: Install dependencies
         run: bundle install
 
-      - name: Run tests with Ruby ${{ matrix.ruby-version }} on ${{ matrix.os }}
+      - name: Run tests on docker(x86)
         run: bundle exec rake
+  tests-on-arm:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: ['3.2']
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+      - uses: actions/checkout@v4
+      - name: Install Ruby ${{ matrix.ruby-version }} on ubuntu
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+      - name: Run tests on docker(arm64)
+        env:
+          ARM: 1
+          COMPOSE_FILE: docker-compose-arm.yml
+        run: |
+          set -xeu
+          sudo apt update
+          sudo apt-get install -y docker-compose
+          bundle install
+          bundle exec rake

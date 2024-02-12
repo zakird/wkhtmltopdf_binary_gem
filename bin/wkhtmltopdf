@@ -10,6 +10,17 @@
 require 'rbconfig'
 require 'zlib'
 
+def architecture
+  case RbConfig::CONFIG['host_cpu']
+  when *%w[arm64 aarch64 arch64]
+    'arm64'
+  when 'x86_64'
+    'amd64'
+  else
+    'i386'
+  end
+end
+
 suffix = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
@@ -44,7 +55,11 @@ suffix = case RbConfig::CONFIG['host_os']
                                   os.start_with?('deepin')
            os = 'debian_9' if os_based_on_debian_9
 
-           os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian')
+           os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian_10')
+
+           os = 'debian_11' if !os_based_on_debian_9 && os.start_with?('debian_11')
+
+           os = 'debian_12' if !os_based_on_debian_9 && os.start_with?('debian_12')
 
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
@@ -70,7 +85,7 @@ end
 
 unless File.exist? binary
   raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
-        'CentOS 6/7/8, Debian 9/10, Archlinux amd64, or Intel-based Cocoa macOS ' \
+        'CentOS 6/7/8, Debian 9/10/11/12, Archlinux amd64, Debian 9/10/11/12 arm64, or Intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 

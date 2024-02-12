@@ -44,6 +44,20 @@ services:
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
+  debian_11:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_11
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_12:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_12
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
   centos_6:
     build:
       context: .

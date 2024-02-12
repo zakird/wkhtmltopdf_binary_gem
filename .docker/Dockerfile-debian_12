@@ -1,0 +1,8 @@
+FROM debian:12
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update
+RUN apt-get install -y ruby libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6
+
+CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version
