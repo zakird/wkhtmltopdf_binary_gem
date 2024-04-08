@@ -10,6 +10,17 @@
 require 'rbconfig'
 require 'zlib'
 
+def architecture
+  case RbConfig::CONFIG['host_cpu']
+  when *%w[arm64 aarch64 arch64]
+    'arm64'
+  when 'x86_64'
+    'amd64'
+  else
+    'i386'
+  end
+end
+
 suffix = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
@@ -48,8 +59,6 @@ suffix = case RbConfig::CONFIG['host_os']
 
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
-
-           architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
 
            "#{os}_#{architecture}"
          when /darwin/
