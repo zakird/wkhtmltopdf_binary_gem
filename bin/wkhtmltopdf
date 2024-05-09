@@ -37,11 +37,12 @@ suffix = case RbConfig::CONFIG['host_os']
                                   os.start_with?('zorin')
 
            os = 'ubuntu_20.04' if os.start_with?('ubuntu_20.') ||
-                                  os.start_with?('ubuntu_21.') ||
                                   os.start_with?('linuxmint_20.')
+           
+	         os = 'ubuntu_21.10' if os.start_with?('ubuntu_21.') ||
+                                  os.start_with?('linuxmint_21.')
 
            os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
-                                  os.start_with?('linuxmint_21.') ||
                                   os.start_with?('tuxedo_22.')
 
            os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
