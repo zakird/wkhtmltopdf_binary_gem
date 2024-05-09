@@ -2,7 +2,12 @@ FROM debian:9
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update
+RUN echo "deb http://archive.debian.org/debian stretch main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://archive.debian.org/debian-security stretch/updates main contrib non-free" >> /etc/apt/sources.list
+
+RUN apt-get -o Acquire::Check-Valid-Until=false update && \
+    apt-get -o Acquire::AllowInsecureRepositories=true update
+
 RUN apt-get install -y ruby libjpeg62-turbo libpng16-16 libxrender1 libfontconfig1 libxext6
 
 CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version
