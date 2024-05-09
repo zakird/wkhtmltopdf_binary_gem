@@ -23,6 +23,13 @@ services:
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
+  ubuntu_22.04:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-ubuntu_22.04
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
   debian_9:
     build:
       context: .
@@ -34,6 +41,20 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile-debian_10
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_11:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_11
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_12:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_12
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
@@ -57,6 +78,14 @@ services:
       dockerfile: .docker/Dockerfile-centos_8
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
+
+  oraclelinux_8:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-oraclelinux_8
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
   rockylinux_8:
     build:
       context: .
