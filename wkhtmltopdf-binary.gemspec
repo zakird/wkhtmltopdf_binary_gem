@@ -11,6 +11,10 @@ Gem::Specification.new do |s|
   s.files = Dir['bin/*']
   s.executables << "wkhtmltopdf"
   s.require_path = '.'
+  s.homepage = 'https://github.com/zakird/wkhtmltopdf_binary_gem'
+
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/master/CHANGELOG.md"
 
   s.add_development_dependency "minitest"
   s.add_development_dependency "rake"
