@@ -1,6 +1,9 @@
-# 0.12.6.x
+# 0.12.6.7
 
-- Setup of Github action automation for Linux/MacOS builds
+- Setup of GitHub action test automation for Linux/MacOS builds
+- Add URLs to gemspec for inclusion on Rubygems.org
+- Add support for several new Linux binaries for Debian, Centos, Ubuntu, Mint, Oracle, Tuxedo
+- Add support for several arm64 Linux binaries
 
 # 0.12.6.6
 
