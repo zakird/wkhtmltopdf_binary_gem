@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.require_path = '.'
   s.homepage = 'https://github.com/zakird/wkhtmltopdf_binary_gem'
 
-  spec.metadata['source_code_uri'] = spec.homepage
-  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/master/CHANGELOG.md"
+  s.metadata['source_code_uri'] = s.homepage
+  s.metadata['changelog_uri'] = "#{s.homepage}/blob/master/CHANGELOG.md"
 
   s.add_development_dependency "minitest"
   s.add_development_dependency "rake"
