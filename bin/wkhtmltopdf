@@ -10,6 +10,17 @@
 require 'rbconfig'
 require 'zlib'
 
+def architecture
+  case RbConfig::CONFIG['host_cpu']
+  when *%w[arm64 aarch64 arch64]
+    'arm64'
+  when 'x86_64'
+    'amd64'
+  else
+    'i386'
+  end
+end
+
 suffix = case RbConfig::CONFIG['host_os']
          when /linux/
            os = `. /etc/os-release 2> /dev/null && echo ${ID}_${VERSION_ID}`.strip
@@ -26,11 +37,13 @@ suffix = case RbConfig::CONFIG['host_os']
                                   os.start_with?('zorin')
 
            os = 'ubuntu_20.04' if os.start_with?('ubuntu_20.') ||
-                                  os.start_with?('ubuntu_21.') ||
                                   os.start_with?('linuxmint_20.')
+           
+	         os = 'ubuntu_21.10' if os.start_with?('ubuntu_21.') ||
+                                  os.start_with?('linuxmint_21.')
 
            os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
-                                  os.start_with?('linuxmint_21.')
+                                  os.start_with?('tuxedo_22.')
 
            os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2') ||
                               (os.empty? && File.read('/etc/centos-release').start_with?('CentOS release 6'))
@@ -38,18 +51,23 @@ suffix = case RbConfig::CONFIG['host_os']
            os = 'centos_7' if (os.start_with?('amzn_2') && !os.start_with?('amzn_20')) ||
                               os.start_with?('rhel_7.')
 
-           os = 'centos_8' if os.start_with?('rocky_8') || os.start_with?('rhel_8.') || os.start_with?('alinux_')
+           os = 'centos_8' if os.start_with?('rocky_8') ||
+                              os.start_with?('rhel_8.') ||
+                              os.start_with?('ol_8.') ||
+                              os.start_with?('alinux_')
 
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
            os = 'debian_9' if os_based_on_debian_9
 
-           os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian')
+           os = 'debian_10' if !os_based_on_debian_9 && os.start_with?('debian_10')
+
+           os = 'debian_11' if !os_based_on_debian_9 && os.start_with?('debian_11')
+
+           os = 'debian_12' if !os_based_on_debian_9 && os.start_with?('debian_12')
 
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
-
-           architecture = RbConfig::CONFIG['host_cpu'] == 'x86_64' ? 'amd64' : 'i386'
 
            "#{os}_#{architecture}"
          when /darwin/
@@ -70,7 +88,7 @@ end
 
 unless File.exist? binary
   raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
-        'CentOS 6/7/8, Debian 9/10, Archlinux amd64, or Intel-based Cocoa macOS ' \
+        'CentOS 6/7/8, Debian 9/10/11/12, Archlinux amd64, Debian 9/10/11/12 arm64, or Intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 
