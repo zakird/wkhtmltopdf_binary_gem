@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "wkhtmltopdf-binary"
-  s.version = "0.12.6.7"
+  s.version = "0.12.6.8"
   s.license = "Apache-2.0"
   s.author = "Zakir Durumeric"
   s.email = "zakird@gmail.com"
