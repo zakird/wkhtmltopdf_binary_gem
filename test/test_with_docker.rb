@@ -70,7 +70,7 @@ class WithDockerTest < Minitest::Test
   end
 
   def test_almalinux_8
-    test with: 'almalinux_8'
+    test_on_x86 with: 'almalinux_8'
   end
 
   def test_with_macos
