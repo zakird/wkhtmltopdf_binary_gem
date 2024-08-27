@@ -1,3 +1,11 @@
+# 0.12.6.8
+
+- Add support for Ubuntu 24.04 using the Ubuntu 22.04 binary
+- Add support for Linux Mint 22 using the Ubuntu 22.04 binary
+- Add support for Alibaba Cloud Linux using the CentOS 8 binary
+- Add support for AlmaLinux using the CentOS 8 binary
+- Fix Amazon Linux 2023 support using the CentOS binaries
+
 # 0.12.6.7
 
 - Setup of GitHub action test automation for Linux/MacOS builds
@@ -75,4 +83,3 @@ Update MacOS `wkhtmltopdf` binary to 0.9.9
 
 # 0.9.9
 Update `wkhtmltopdf` binaries with version 0.9.9
-
