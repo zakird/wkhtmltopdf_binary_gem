@@ -45,6 +45,8 @@ suffix = case RbConfig::CONFIG['host_os']
            os = 'ubuntu_22.04' if os.start_with?('ubuntu_22.') ||
                                   os.start_with?('ubuntu_24.') ||
                                   os.start_with?('tuxedo_22.') ||
+                                  os.start_with?('neon_24.') ||
+                                  os.start_with?('neon_22.') ||
                                   os.start_with?('linuxmint_22')
 
            os = 'centos_6' if (os.start_with?('amzn_') && os != 'amzn_2' && os != 'amzn_2023') ||
