@@ -54,12 +54,12 @@ class WithDockerTest < Minitest::Test
   end
 
   def test_with_ubuntu_22
-   test_on_x86 with: 'ubuntu_22.04'
+   test_on_x86_and_arm with: 'ubuntu_22.04'
   end
 
   def test_with_ubuntu_24
-    test_on_x86 with: 'ubuntu_24.04'
-   end
+    test_on_x86_and_arm with: 'ubuntu_24.04'
+  end
 
   def test_with_archlinux
     test_on_x86 with: 'archlinux'
