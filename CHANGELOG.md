@@ -1,3 +1,8 @@
+# 0.12.6.9
+
+- Add support to ubuntu 22.04 and 24.04 in arm64
+- Add support for KDE Neon 22.04 & 24.04 (Ubuntu derivative)
+
 # 0.12.6.8
 
 - Add support for Ubuntu 24.04 using the Ubuntu 22.04 binary
