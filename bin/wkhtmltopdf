@@ -72,6 +72,8 @@ suffix = case RbConfig::CONFIG['host_os']
 
            os = 'debian_12' if !os_based_on_debian_9 && os.start_with?('debian_12')
 
+           os = 'debian_12' if !os_based_on_debian_9 && os.start_with?('debian_13')
+
            os = 'archlinux' if os.start_with?('arch_') ||
                                os.start_with?('manjaro_')
 
