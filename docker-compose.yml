@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   ubuntu_16.04:
     build:
       context: .
@@ -55,6 +54,13 @@ services:
     build:
       context: .
       dockerfile: .docker/Dockerfile-debian_12
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  debian_13:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-debian_13
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 

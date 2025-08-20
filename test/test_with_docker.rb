@@ -41,6 +41,10 @@ class WithDockerTest < Minitest::Test
     test_on_x86_and_arm with: 'debian_12'
   end
 
+  def test_debian_13
+    test_on_x86 with: 'debian_13'
+  end
+
   def test_with_ubuntu_16
     test_on_x86 with: 'ubuntu_16.04'
   end
