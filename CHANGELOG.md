@@ -1,3 +1,7 @@
+# 0.12.6.10
+
+- Add support for Debian 13 (with Debian 12 binaries)
+
 # 0.12.6.9
 
 - Add support to ubuntu 22.04 and 24.04 in arm64
