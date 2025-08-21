@@ -11,13 +11,11 @@ require 'rbconfig'
 require 'zlib'
 
 def architecture
-  case RbConfig::CONFIG['host_cpu']
-  when *%w[arm64 aarch64 arch64]
+  host_cpu = RbConfig::CONFIG['host_cpu']
+  if %w[arm64 aarch64 arch64].include?(host_cpu)
     'arm64'
-  when 'x86_64'
-    'amd64'
   else
-    'i386'
+    host_cpu
   end
 end
 
