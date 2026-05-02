@@ -65,6 +65,10 @@ class WithDockerTest < Minitest::Test
     test_on_x86_and_arm with: 'ubuntu_24.04'
   end
 
+  def test_with_ubuntu_26
+    test_on_x86_and_arm with: 'ubuntu_26.04'
+  end
+
   def test_with_archlinux
     test_on_x86 with: 'archlinux'
   end

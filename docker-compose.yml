@@ -29,6 +29,20 @@ services:
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
+  ubuntu_24.04:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-ubuntu_24.04
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  ubuntu_26.04:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-ubuntu_26.04
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
   debian_9:
     build:
       context: .
