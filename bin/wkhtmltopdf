@@ -68,17 +68,17 @@ suffix = case RbConfig::CONFIG['host_os']
            # (OpenSSL 1.1) does not. See issues #191 (RHEL/Rocky 9), #169 (CentOS
            # Stream 9) and #182 (Fedora) at
            # https://github.com/zakird/wkhtmltopdf_binary_gem/issues
-           os = 'debian_12' if os.start_with?('rocky_9') ||
-                               os.start_with?('rocky_10') ||
-                               os.start_with?('rhel_9.') ||
-                               os.start_with?('rhel_10.') ||
-                               os.start_with?('ol_9.') ||
-                               os.start_with?('ol_10.') ||
-                               os.start_with?('almalinux_9') ||
+           os = 'debian_12' if os.start_with?('almalinux_9') ||
                                os.start_with?('almalinux_10') ||
                                os.start_with?('centos_9') ||
                                os.start_with?('centos_10') ||
-                               os.start_with?('fedora')
+                               os.start_with?('fedora') ||
+                               os.start_with?('ol_9.') ||
+                               os.start_with?('ol_10.') ||
+                               os.start_with?('rhel_9.') ||
+                               os.start_with?('rhel_10.') ||
+                               os.start_with?('rocky_9') ||
+                               os.start_with?('rocky_10')
 
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
