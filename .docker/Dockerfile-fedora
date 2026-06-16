@@ -1,0 +1,5 @@
+FROM fedora:42
+
+RUN dnf install -y ruby libjpeg-turbo libpng libXrender fontconfig libXext
+
+CMD /root/wkhtmltopdf_binary_gem/bin/wkhtmltopdf --version

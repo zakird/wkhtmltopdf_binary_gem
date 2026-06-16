@@ -106,6 +106,41 @@ services:
     volumes:
       - .:/root/wkhtmltopdf_binary_gem
 
+  almalinux_9:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-almalinux_9
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  almalinux_10:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-almalinux_10
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  fedora:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-fedora
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  rockylinux_9:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-rockylinux_9
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
+  rockylinux_10:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile-rockylinux_10
+    volumes:
+      - .:/root/wkhtmltopdf_binary_gem
+
   archlinux:
     build:
       context: .

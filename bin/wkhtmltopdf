@@ -62,6 +62,24 @@ suffix = case RbConfig::CONFIG['host_os']
                               os.start_with?('alinux_') ||
                               os == 'amzn_2023'
 
+           # RHEL 9/10 and their clones (Rocky, AlmaLinux, Oracle, CentOS Stream),
+           # plus modern Fedora, ship OpenSSL 3 and a newer glibc, so the Debian 12
+           # binary (which links libssl.so.3) runs on them while the CentOS 8 binary
+           # (OpenSSL 1.1) does not. See issues #191 (RHEL/Rocky 9), #169 (CentOS
+           # Stream 9) and #182 (Fedora) at
+           # https://github.com/zakird/wkhtmltopdf_binary_gem/issues
+           os = 'debian_12' if os.start_with?('almalinux_9') ||
+                               os.start_with?('almalinux_10') ||
+                               os.start_with?('centos_9') ||
+                               os.start_with?('centos_10') ||
+                               os.start_with?('fedora') ||
+                               os.start_with?('ol_9.') ||
+                               os.start_with?('ol_10.') ||
+                               os.start_with?('rhel_9.') ||
+                               os.start_with?('rhel_10.') ||
+                               os.start_with?('rocky_9') ||
+                               os.start_with?('rocky_10')
+
            os_based_on_debian_9 = os.start_with?('debian_9') ||
                                   os.start_with?('deepin')
            os = 'debian_9' if os_based_on_debian_9
@@ -96,7 +114,8 @@ end
 
 unless File.exist? binary
   raise 'Invalid platform, must be running on Ubuntu 16.04/18.04/20.04/22.04, ' \
-        'CentOS 6/7/8, Debian 9/10/11/12, Archlinux amd64, Debian 9/10/11/12 arm64, or Intel-based Cocoa macOS ' \
+        'CentOS 6/7/8, RHEL/Rocky/AlmaLinux 8/9/10, Fedora, Debian 9/10/11/12/13, Archlinux amd64, ' \
+        'Debian 9/10/11/12 arm64, or Intel-based Cocoa macOS ' \
         "(missing binary: #{binary})."
 end
 
