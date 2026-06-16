@@ -77,6 +77,26 @@ class WithDockerTest < Minitest::Test
     test_on_x86 with: 'almalinux_8'
   end
 
+  def test_rockylinux_9
+    test_on_x86 with: 'rockylinux_9'
+  end
+
+  def test_almalinux_9
+    test_on_x86 with: 'almalinux_9'
+  end
+
+  def test_rockylinux_10
+    test_on_x86 with: 'rockylinux_10'
+  end
+
+  def test_almalinux_10
+    test_on_x86 with: 'almalinux_10'
+  end
+
+  def test_fedora
+    test_on_x86 with: 'fedora'
+  end
+
   def test_with_macos
     assert_equal('wkhtmltopdf 0.12.6 (with patched qt)', `bin/wkhtmltopdf --version`.strip) if macos?
   end
