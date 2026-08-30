@@ -8,6 +8,7 @@
 # of the License at http://www.apache.org/licenses/LICENSE-2.0
 
 require 'rbconfig'
+require 'tempfile'
 require 'zlib'
 
 def architecture
@@ -89,8 +90,11 @@ suffix = ENV['WKHTMLTOPDF_HOST_SUFFIX'] unless ENV['WKHTMLTOPDF_HOST_SUFFIX'].to
 binary = "#{__FILE__}_#{suffix}"
 
 if File.exist?("#{binary}.gz") && !File.exist?(binary)
-  File.open binary, 'wb', 0o755 do |file|
-    Zlib::GzipReader.open("#{binary}.gz") { |gzip| file << gzip.read }
+  Tempfile.create([File.basename(binary), '.tmp'], File.dirname(binary)) do |file|
+    Zlib::GzipReader.open("#{binary}.gz") { |gzip| IO.copy_stream(gzip, file) }
+    file.chmod(0o755)
+    file.flush
+    File.rename(file.path, binary)
   end
 end
 
